@@ -1,0 +1,6 @@
+{
+    "components": [
+        { "name": "button", "wrapperName": "button" },
+        { "name": "check_box", "wrapperName": "check-box" }
+      ]
+}
