@@ -1,23 +1,26 @@
 {
-    "author": {
-      "name": "Developer Express Inc."
-    },
-    "name": "devextreme-bundle-maker",
-    "version": "0.0.1",
-    "devDependencies": {
-      "webpack": "^4.44.1",
-      "webpack-cli": "^3.2.12",
-      "typescript": "^4.0.2",
-      "ts-loader": "^8.0.3",
-      "lodash": "^4.17.20",
-      "vue-loader": "^15.9.3",
-      "vue-template-compiler": "^2.6.12"
-    },
-    "scripts": {
-        "start": "sh build.sh",
-        "build:react": "webpack --profile --json > ./bundles/react/webpack-stats.json --config react.webpack.config.js",
-        "build:vue": "webpack --profile --json > ./bundles/vue/webpack-stats.json --config vue.webpack.config.js"
-    },
-    "license": "MIT"
-  }
-  
+  "author": {
+    "name": "Developer Express Inc."
+  },
+  "name": "devextreme-bundle-maker",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "lodash": "^4.17.20",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.2.12"
+  },
+  "scripts": {
+    "start": "sh build.sh",
+    "build:react": "webpack --profile --json > ./bundles/react/webpack-stats.json --config react.webpack.config.js",
+    "build:vue": "webpack --profile --json > ./bundles/vue/webpack-stats.json --config vue.webpack.config.js"
+  },
+  "license": "MIT"
+}

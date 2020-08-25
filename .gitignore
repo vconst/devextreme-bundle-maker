@@ -1,0 +1,8 @@
+node_modules
+devextreme
+devextreme-react
+devextreme-vue
+devextreme-vue-renovated
+devextreme-react-renovated
+bundles
+yarn.lock

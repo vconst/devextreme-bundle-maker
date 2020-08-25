@@ -24,13 +24,13 @@ module.exports = components.reduce((bundles, component) => {
       filename: component.name + '-wrapper.js',
     },
   }));
-  // bundles.push(_.merge({}, configTemplate, {
-  //   name: component.name + '-renovated',
-  //   entry: './devextreme-vue-renovated/npm/' + component.wrapperName + '.js',
-  //   output: {
-  //     filename: component.name + '-renovated-wrapper.js',
-  //   },
-  // }));
+  bundles.push(_.merge({}, configTemplate, {
+    name: component.name + '-renovated',
+    entry: './devextreme-vue-renovated/npm/' + component.wrapperName + '.js',
+    output: {
+      filename: component.name + '-renovated-wrapper.js',
+    },
+  }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
       entry: './devextreme/artifacts/vue/renovation/ui/' + component.name + '.vue',
@@ -42,6 +42,18 @@ module.exports = components.reduce((bundles, component) => {
         {
           test: /\.vue$/,
           loader: 'vue-loader'
+        },
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          options: { appendTsSuffixTo: [/\.vue$/] }
+        },
+        {
+          test: /\.js?$/,
+          loader: 'babel-loader',
+          options: {
+            plugins: ["@babel/plugin-proposal-nullish-coalescing-operator", "@babel/plugin-proposal-optional-chaining"]
+          }
         }
       ]
     },
