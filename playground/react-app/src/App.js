@@ -5,16 +5,7 @@ function App() {
   return (
     <div>
         NativeButton
-        <NativeButton />
-        
-        NativeButton
-        <NativeButton />
-        
-        NativeButton
-        <NativeButton />
-        
-        NativeButton
-        <NativeButton />
+        <NativeButton text="Click Me!" onClick={() => alert('clicked')} />
     </div>
   );
 }
