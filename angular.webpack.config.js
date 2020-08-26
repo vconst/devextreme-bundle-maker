@@ -14,6 +14,7 @@ const configTemplate = {
     'angular': 'window.angular',
     '@angular/core': '@angular/core',
     '@angular/common': '@angular/common',
+    '@angular/forms': '@angular/forms',
     'devextreme-angular/core': '../../core/index.ts'
   }
 };
