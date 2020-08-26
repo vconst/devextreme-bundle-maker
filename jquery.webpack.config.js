@@ -5,11 +5,19 @@ const configTemplate = {
   devtool: false,
   output: {
     path: __dirname + '/bundles/jquery',
-    libraryTarget: 'commonjs2'
   },
-  // optimization: {
-  //   minimize: false
-  // },
+  optimization: {
+    minimize: false
+  },
+  externals: [
+    function(context, request, callback) {
+      if (/renderer$/.test(request)){
+        return callback(null, 'window.jQuery');
+      }
+
+      callback();
+    }
+  ],
 };
 
 module.exports = components.reduce((bundles, component) => {
