@@ -25,8 +25,9 @@
     "build:angular": "webpack --profile --json > ./bundles/angular/webpack-stats.json --config angular.webpack.config.js",
     "build:jquery": "webpack --profile --json > ./bundles/jquery/jquery-stats.json --config jquery.webpack.config.js",
     
-    "install": "cd playground/react-app && yarn",
-    "start:react": "cd playground/react-app && yarn start"
+    "start:react": "cd playground/react-app && yarn && yarn start",
+    "start:vue": "cd playground/vue-app && yarn && yarn serve",
+    "start:angular": "cd playground/angular-app && yarn && yarn start"
   },
   "license": "MIT"
 }
