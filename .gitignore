@@ -4,5 +4,7 @@ devextreme-react
 devextreme-vue
 devextreme-vue-renovated
 devextreme-react-renovated
+devextreme-angular
+devextreme-angular-renovated
 bundles
 yarn.lock
