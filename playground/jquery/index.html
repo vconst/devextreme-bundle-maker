@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>DevExtreme jQuery Example</title>
 
@@ -13,21 +14,84 @@
     <!-- <script type="text/javascript" src="../../bundles/jquery/check_box-basic.js" charset="utf-8"></script> -->
     <script type="text/javascript" src="../../bundles/jquery/check_box-renovated.js" charset="utf-8"></script>
 </head>
+
 <body>
     <div id="button"></div>
     <div id="checkbox"></div>
     <script>
-        $(function() {
-            $("#button").dxButton({
-                text: 'Click me!',
-                onClick: function() { alert("clicked"); }
+        // Initial rendering
+
+        const count = 5000;
+        let index = 0;
+        const contentReady = () => {
+            index += 1;
+
+            if (index === count) {
+                console.timeEnd('First render (min options, content ready)');
+            }
+        };
+
+        const prepareWorkspace = () => {
+            document.body.innerHTML = '';
+            for (var i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.id = i;
+                document.body.appendChild(el);
+            }
+        }
+
+        prepareWorkspace();
+        console.time('First render (maximum options)');
+
+        for (var i = 0; i < count; i++) {
+            $('#' + i).dxButton({
+                onContentReady: () => undefined,
+                text: 'button',
+                icon: 'download',
+                accessKey: 'c',
+                activeStateEnabled: true,
+                disabled: false,
+                elementAttr: { 'data-fake': 123 },
+                hint: 'text hint',
+                onClick: () => undefined,
+                rtlEnabled: true,
+                tabIndex: 1,
+                width: 100,
+                height: '40'
             });
-            
-            $("#checkbox").dxCheckBox({
-                text: 'Click me!',
-                onClick: function() { alert("clicked"); }
-            });
-        });
+        }
+        console.timeEnd('First render (maximum options)');
+
+
+        prepareWorkspace();
+        console.time('First render (min options)');
+        console.time('First render (min options, content ready)');
+
+        for (var i = 0; i < count; i++) {
+            $('#' + i).dxButton({ onContentReady: contentReady, text: 'button' });
+        }
+
+        console.timeEnd('First render (min options)')
+
+        // // Change option
+
+        // document.body.innerHTML = '';
+
+        // console.time('Change option: \'text\'');
+        // const el = document.createElement('div');
+        // document.body.appendChild(el);
+        // const button = new dxButton(el, {});
+        // for (var i = 0; i < count; i++) {
+        //     button.option('text', String(i));
+        // }
+        // console.timeEnd('Change option: \'text\'');
+
+        // console.time('Change option: \'useSubmitBehavior\' (invalidate)');
+        // for (var i = 0; i < count; i++) {
+        //     button.option('useSubmitBehavior', !button.option('useSubmitBehavior'));
+        // }
+        // console.timeEnd('Change option: \'useSubmitBehavior\' (invalidate)');
     </script>
 </body>
+
 </html>
