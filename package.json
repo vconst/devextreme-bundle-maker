@@ -22,7 +22,8 @@
     "start": "sh build.sh",
     "build:react": "webpack --profile --json > ./bundles/react/webpack-stats.json --config react.webpack.config.js",
     "build:vue": "webpack --profile --json > ./bundles/vue/webpack-stats.json --config vue.webpack.config.js",
-    "build:angular": "webpack --profile --json > ./bundles/angular/webpack-stats.json --config angular.webpack.config.js"
+    "build:angular": "webpack --profile --json > ./bundles/angular/webpack-stats.json --config angular.webpack.config.js",
+    "build:jquery": "webpack --profile --json > ./bundles/jquery/jquery-stats.json --config jquery.webpack.config.js"
   },
   "license": "MIT"
 }
