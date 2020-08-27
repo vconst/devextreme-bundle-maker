@@ -8,8 +8,8 @@
     <link href="https://cdn3.devexpress.com/jslib/20.1.6/css/dx.light.css" rel="stylesheet">
     <script type="text/javascript" src="../../devextreme/artifacts/js/jquery.js"></script>
 
-    <!-- <script type="text/javascript" src="../../bundles/jquery/button-basic.js" charset="utf-8"></script> -->
-    <script type="text/javascript" src="../../bundles/jquery/button-renovated.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../bundles/jquery/button-basic.js" charset="utf-8"></script>
+    <!-- <script type="text/javascript" src="../../bundles/jquery/button-renovated.js" charset="utf-8"></script> -->
 
     <!-- <script type="text/javascript" src="../../bundles/jquery/check_box-basic.js" charset="utf-8"></script> -->
     <script type="text/javascript" src="../../bundles/jquery/check_box-renovated.js" charset="utf-8"></script>
@@ -20,7 +20,7 @@
     <div id="checkbox"></div>
     <script>
         // Initial rendering
-
+        let buttons = [];
         const count = 5000;
         let index = 0;
         const contentReady = () => {
@@ -39,6 +39,9 @@
                 document.body.appendChild(el);
             }
         }
+
+        console.log('startMemory');
+        console.log(window.performance.memory);
 
         prepareWorkspace();
         console.time('First render (maximum options)');
@@ -64,6 +67,103 @@
 
 
         prepareWorkspace();
+        console.time('First render (with template)');
+
+        for (var i = 0; i < count; i++) {
+            $('#' + i).dxButton({
+                text: 'button',
+                template: function () {
+                    return $("<div>").text("Button Template");
+                }
+            });
+        }
+
+        console.timeEnd('First render (with template)')
+
+
+        prepareWorkspace();
+        buttons = [];
+        for (var i = 0; i < count; i++) {
+            buttons.push($('#' + i).dxButton({ text: 'button' }).dxButton('instance'));
+        }
+        
+        console.time('Rerender (Icon option change)');
+        buttons.forEach((button) => {
+            button.option({ icon: 'download' });
+        });
+
+        console.timeEnd('Rerender (Icon option change)');
+
+
+        prepareWorkspace();
+        buttons = [];
+        for (var i = 0; i < count; i++) {
+            buttons.push($('#' + i).dxButton({ text: 'button' }).dxButton('instance'));
+        }
+        
+        console.time('Rerender (Text option change)');
+        buttons.forEach((button) => {
+            button.option({ text: 'New Button Text' });
+        });
+
+        console.timeEnd('Rerender (Text option change)');
+
+
+
+        prepareWorkspace();
+        buttons = [];
+        for (var i = 0; i < count; i++) {
+            buttons.push($('#' + i).dxButton({ text: 'button' }).dxButton('instance'));
+        }
+        
+        console.time('Rerender (useInkRipple option change)');
+        buttons.forEach((button) => {
+            button.option({ useInkRipple: true });
+        });
+
+        console.timeEnd('Rerender (useInkRipple option change)');
+        
+        
+        
+        prepareWorkspace();
+        buttons = [];
+        for (var i = 0; i < count; i++) {
+            buttons.push($('#' + i).dxButton({ text: 'button' }).dxButton('instance'));
+        }
+        
+        console.time('Rerender (onFocus)');
+        buttons.forEach((button) => {
+            button.focus();
+        });
+
+        console.timeEnd('Rerender (onFocus)');
+
+
+
+        prepareWorkspace();
+        buttons = [];
+        index = 0;
+        for (var i = 0; i < count; i++) {
+            buttons.push($('#' + i).dxButton({
+                text: 'button',
+                onClick: () => {
+                    index += 1;
+
+                    if (index === count) {
+                        console.timeEnd('Rerender (Click)');
+                    }
+                },
+            }).dxButton('instance'));
+        }
+        
+        console.time('Rerender (Click)');
+        buttons.forEach((button, i) => {
+            $('#' + i).click();
+        });
+
+
+        prepareWorkspace();
+        index = 0;
         console.time('First render (min options)');
         console.time('First render (min options, content ready)');
 
@@ -71,7 +171,12 @@
             $('#' + i).dxButton({ onContentReady: contentReady, text: 'button' });
         }
 
-        console.timeEnd('First render (min options)')
+        console.timeEnd('First render (min options)');
+
+        prepareWorkspace();
+
+        console.log('endMemory');
+        console.log(window.performance.memory);
 
         // // Change option
 
