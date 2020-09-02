@@ -7,15 +7,15 @@ const configTemplate = {
     path: __dirname + '/bundles/angular',
     libraryTarget: 'commonjs2'
   },
-  // optimization: {
-  //   minimize: false
-  // },
+  optimization: {
+    minimize: false
+  },
   externals: {
     'angular': 'window.angular',
     '@angular/core': '@angular/core',
     '@angular/common': '@angular/common',
     '@angular/forms': '@angular/forms',
-    'devextreme-angular/core': '../../core/index.ts'
+    'devextreme-angular/core': './devextreme-angular-core.js'
   }
 };
 

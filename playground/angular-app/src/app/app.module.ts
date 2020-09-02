@@ -3,7 +3,9 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppComponent } from './app.component';
 
-import { DxButtonModule } from './button-native';
+// import { DxButtonModule } from './button-native';
+// import { DxButtonModule } from './button-wrapper';
+import { DxButtonModule } from './button-renovated-wrapper';
 
 @NgModule({
   declarations: [
