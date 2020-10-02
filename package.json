@@ -19,12 +19,11 @@
     "angular2-template-loader": "^0.6.2"
   },
   "scripts": {
-    "start": "sh build.sh",
+    "build:repos": "sh build.sh",
     "build:react": "webpack --profile --json > ./bundles/react/webpack-stats.json --config react.webpack.config.js",
     "build:vue": "webpack --profile --json > ./bundles/vue/webpack-stats.json --config vue.webpack.config.js",
     "build:angular": "webpack --profile --json > ./bundles/angular/webpack-stats.json --config angular.webpack.config.js",
     "build:jquery": "webpack --profile --json > ./bundles/jquery/jquery-stats.json --config jquery.webpack.config.js",
-    
     "start:react": "cd playground/react-app && yarn && yarn start",
     "start:vue": "cd playground/vue-app && yarn && yarn serve",
     "start:angular": "cd playground/angular-app && yarn && yarn start"
