@@ -10,11 +10,11 @@ Check the `bundles` directory after script finish. There should be `NAME-basic.j
 
 Vue and Angular bundles are also copied to appropriate playground directory. React and jquery use bundles directly from `bundles` directory.
 
-## Some bundle did not created successfully. How to find a problem?
+## Some bundle did not create successfully. How to find a problem?
 
-First of all, open `webpack-stats.json` file in appropriate directory inside of `bundles` dir. Here you can see where error raised or which file necessary for bundle build is missed.
+First of all, open `webpack-stats.json` file in the appropriate subdir of `bundles` directory. Here you can see where error raised or which file necessary for bundle build is missed.
 
-You can also see shell script log in `build_repos.log` file to find which concrete command has been failed and reproduce it manually.
+You can also see shell script log in `build_repos.log` file to fin concrete command which has been failed and reproduce it manually.
 
 Please, note, that some command which ends with status `Error` can have no influence on result bundle. For example, `repo clone` command status can be error when there is already cloned repo in root directory. Or jquery can be built with error if there are some problems in themebuilder. But it's okay for bundle create.
 
@@ -45,6 +45,6 @@ Just check out the sizes of files in the `bundles` directory.
 
 ## Memory
 
-Go to the `performance` tab in dev tools. Set `memory` checkbox to true and start recording. After it refresh the page, wait a second, stop recording and check used memory heap size in right left corner.
+Go to the `performance` tab in dev tools. Set `memory` checkbox to true and start recording. After it refresh the page, wait a second, stop recording and check used memory heap size in right top corner.
 
 To check if there is memory leak remove and add widgets to the page several times and check memory graphic.
