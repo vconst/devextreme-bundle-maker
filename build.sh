@@ -1,6 +1,6 @@
 update_meta()
 {
-    npm run update-integration-meta --  --js-scripts ../devextreme/js &&
+    $SUDO npm run update-integration-meta --  --js-scripts ../devextreme/js &&
         log 3 1 SUCCESS 'update meta data' ||
         log 3 1 ERROR 'update meta data'
 }
@@ -8,7 +8,7 @@ update_meta()
 build()
 {
     cd ./$1 && log 3 1 SUCCESS 'go to '$1
-    npm i && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
+    $SUDO npm i && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
 
     if echo "$1" | grep -q "renovated"; 
     then
@@ -17,17 +17,17 @@ build()
 
     if echo "$1" | grep -q "angular"; 
     then
-        node ./node_modules/gulp/bin/gulp build.components --max-old-space-size=4096 &&
+        $SUDO node ./node_modules/gulp/bin/gulp build.components --max-old-space-size=4096 &&
             log 3 1 SUCCESS 'build' ||
             log 3 1 ERROR 'build'
     else
-        npm run build && log 3 1 SUCCESS 'build' || log 3 1 ERROR 'build'
-        node ./node_modules/gulp/bin/gulp npm.build --max-old-space-size=4096 &&
+        $SUDO npm run build && log 3 1 SUCCESS 'build' || log 3 1 ERROR 'build'
+        $SUDO node ./node_modules/gulp/bin/gulp npm.build --max-old-space-size=4096 &&
             log 3 1 SUCCESS 'node gulp npm.build' ||
             log 3 1 ERROR 'node gulp npm.build'
     fi
 
-    npm run pack &&
+    $SUDO npm run pack &&
         log 3 1 SUCCESS 'pack' ||
         log 3 1 ERROR 'pack'
     cd .. && log 3 0 SUCCESS 'go away from '$1
@@ -35,7 +35,7 @@ build()
 
 update_path_to_devextreme()
 {
-    sed -i 's/"devextreme"\:.*,/"devextreme": "file:..\/devextreme\/artifacts\/npm\/devextreme-renovation",/g' ./$1/package.json
+    $SUDO sed -i 's/"devextreme"\:.*,/"devextreme": "file:..\/devextreme\/artifacts\/npm\/devextreme-renovation",/g' ./$1/package.json
 }
 
 clone_and_build_repo()
@@ -70,11 +70,12 @@ clone_and_build_repo()
 build_devextreme()
 {
     cd devextreme && log 2 1 SUCCESS 'go to ./devextreme'
-    npm i && log 2 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
-    npm run build:r && log 2 1 SUCCESS 'build jquery' || log 2 1 ERROR 'build jquery'
-    npm run build:react && log 2 1 SUCCESS 'build react' || log 2 1 ERROR 'build react'
-    npm run build:vue && log 2 1 SUCCESS 'build vue' || log 2 1 ERROR 'build vue'
-    npm run build:angular && log 2 1 SUCCESS 'build angular' || log 2 1 ERROR 'build angular'
+
+    $SUDO npm i && log 2 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
+    $SUDO npm run build:r && log 2 1 SUCCESS 'build jquery' || log 2 1 ERROR 'build jquery'
+    $SUDO npm run build:react && log 2 1 SUCCESS 'build react' || log 2 1 ERROR 'build react'
+    $SUDO npm run build:vue && log 2 1 SUCCESS 'build vue' || log 2 1 ERROR 'build vue'
+    $SUDO npm run build:angular && log 2 1 SUCCESS 'build angular' || log 2 1 ERROR 'build angular'
     cd .. && log 2 0 SUCCESS 'go away from ./devextreme'
 }
 
@@ -97,11 +98,18 @@ log()
         PATH_PREF=$PATH_PREF'../'
     done   
 
-    echo $TABS\> $TYPE':' $MESSAGE >> $PATH_PREF'build_repos.log'
+    $SUDO echo $TABS\> $TYPE':' $MESSAGE >> $PATH_PREF'build_repos.log'
 }
 
+# Use sudo on unix OS
+SUDO=""
+if [ $# -ne 0 ];
+then
+    SUDO='sudo'
+fi
+
 # Clear log file
-echo '' > build_repos.log
+$SUDO echo '' > build_repos.log
 
 # Clone and build devextreme
 git clone https://github.com/DevExpress/DevExtreme devextreme &&
@@ -144,16 +152,16 @@ mkdir ./bundles/angular &&
 
 # Create all bundles
 echo '' >> build_repos.log
-npm run build:jquery && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
-npm run build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
-npm run build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
-npm run build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
+$SUDO npm run build:jquery:unix && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
+$SUDO npm run build:react:unix && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
+$SUDO npm run build:vue:unix && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
+$SUDO npm run build:angular:unix && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
 
 # Copy Vue and Angular bundle to playground
 echo '' >> build_repos.log
-cp ./bundles/vue/*.js ./playground/vue-app/src/components/ &&
+$SUDO cp ./bundles/vue/*.js ./playground/vue-app/src/components/ &&
     log 1 0 SUCCESS 'vue bundles copies to playground' ||
     log 1 0 ERROR 'vue bundles copies to playground'
-cp ./bundles/angular/*.js ./playground/angular-app/src/app/ &&
+$SUDO cp ./bundles/angular/*.js ./playground/angular-app/src/app/ &&
     log 1 0 SUCCESS 'angular bundles copies to playground' ||
     log 1 0 ERROR 'angular bundles copies to playground'
