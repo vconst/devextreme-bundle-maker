@@ -4,7 +4,7 @@
 2. Check the current terminal is `bash`
 3. Run `npm i` to install packages
 4. Open `components.json` and add necessary widget
-5. Run `npm run build:repos` for all bundles create. On Unix OS use `sudo`
+5. Run `npm run build:repos` for all bundles create. On Unix OS use `npm run build:repos:unix`
 
 Check the `bundles` directory after script finish. There should be `NAME-basic.js` and `NAME-renovated.js` bundles in jquery directory and 3 bundles for each another approach: `NAME-native.js`, `NAME-wrapper.js` and `NAME-renovated-wrapper.js`.
 
@@ -30,7 +30,7 @@ You can choose your own testcase set, but following are necessary:
 
 For performance measuring we use mutation count and time. See [this excel table](https://devexpress.sharepoint.com/:x:/r/sites/devextreme/_layouts/15/doc2.aspx?sourcedoc=%7B83b3ff2d-7c2b-4ecc-aa0f-98a7bf077c6e%7D&action=edit&activeCell=%27Pager%27!C3&wdrcid=2bb7cd88-846e-40dc-8e73-66428d6ae10e&wdrldc=1&cid=eedc6bd9-d61b-456b-b02a-ca67364bbd9a).
 
-Check out the `playground` directory. There are prepared servers for each approch. Just run `npm run start:react` or another to start the server. You should refactor imports and tests for your widget.
+Check out the `playground` directory. There are prepared servers for each approch. Just run `npm run start:react` or another to start the server. On Unix OS use `npm run start:react:unix` etc. You should refactor imports and tests for your widget.
 
 Do not pay attention to the time results at the first test run - they may be unreliable. Take the average value of the next few test runs. Put a percentage value in the table - how much longer is the test run time with the renovated widget compared to the old one. You can use [this online calculator](https://calcus.ru/kalkulyator-procentov) to simpify value computation.
 
