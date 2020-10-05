@@ -152,10 +152,10 @@ mkdir ./bundles/angular &&
 
 # Create all bundles
 echo '' >> build_repos.log
-$SUDO npm run build:jquery:unix && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
-$SUDO npm run build:react:unix && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
-$SUDO npm run build:vue:unix && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
-$SUDO npm run build:angular:unix && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
+$SUDO npm run build:jquery && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
+$SUDO npm run build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
+$SUDO npm run build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
+$SUDO npm run build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
 
 # Copy Vue and Angular bundle to playground
 echo '' >> build_repos.log
