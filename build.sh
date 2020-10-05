@@ -10,19 +10,19 @@ build()
     cd ./$1 && log 3 1 SUCCESS 'go to '$1
     yarn && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
 
-    if [[ $1 == *"renovated"* ]]; 
+    if echo "$1" | grep -q "renovated"; 
     then
         update_meta
     fi
 
-    if [[ $1 == *"angular"* ]]; 
+    if echo "$1" | grep -q "angular"; 
     then
         node ./node_modules/gulp/bin/gulp build.components --max-old-space-size=4096 &&
             log 3 1 SUCCESS 'build' ||
             log 3 1 ERROR 'build'
     else
         yarn build && log 3 1 SUCCESS 'build' || log 3 1 ERROR 'build'
-        gulp npm.build &&
+        ./node_modules/gulp/bin/gulp npm.build &&
             log 3 1 SUCCESS 'node gulp npm.build' ||
             log 3 1 ERROR 'node gulp npm.build'
     fi
@@ -149,7 +149,7 @@ yarn build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build
 yarn build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
 yarn build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
 
-# # Copy Vue and Angular bundle to playground
+# Copy Vue and Angular bundle to playground
 echo '' >> build_repos.log
 cp ./bundles/vue/*.js ./playground/vue-app/src/components/ &&
     log 1 0 SUCCESS 'vue bundles copies to playground' ||
