@@ -1,6 +1,6 @@
 update_meta()
 {
-    yarn update-integration-meta --  --js-scripts ../devextreme/js &&
+    npm run update-integration-meta --  --js-scripts ../devextreme/js &&
         log 3 1 SUCCESS 'update meta data' ||
         log 3 1 ERROR 'update meta data'
 }
@@ -8,7 +8,7 @@ update_meta()
 build()
 {
     cd ./$1 && log 3 1 SUCCESS 'go to '$1
-    yarn && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
+    npm i && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
 
     if echo "$1" | grep -q "renovated"; 
     then
@@ -21,13 +21,13 @@ build()
             log 3 1 SUCCESS 'build' ||
             log 3 1 ERROR 'build'
     else
-        yarn build && log 3 1 SUCCESS 'build' || log 3 1 ERROR 'build'
-        ./node_modules/gulp/bin/gulp npm.build &&
+        npm run build && log 3 1 SUCCESS 'build' || log 3 1 ERROR 'build'
+        node ./node_modules/gulp/bin/gulp npm.build --max-old-space-size=4096 &&
             log 3 1 SUCCESS 'node gulp npm.build' ||
             log 3 1 ERROR 'node gulp npm.build'
     fi
 
-    yarn pack &&
+    npm run pack &&
         log 3 1 SUCCESS 'pack' ||
         log 3 1 ERROR 'pack'
     cd .. && log 3 0 SUCCESS 'go away from '$1
@@ -70,11 +70,11 @@ clone_and_build_repo()
 build_devextreme()
 {
     cd devextreme && log 2 1 SUCCESS 'go to ./devextreme'
-    yarn && log 2 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
-    yarn build:r && log 2 1 SUCCESS 'build jquery' || log 2 1 ERROR 'build jquery'
-    yarn build:react && log 2 1 SUCCESS 'build react' || log 2 1 ERROR 'build react'
-    yarn build:vue && log 2 1 SUCCESS 'build vue' || log 2 1 ERROR 'build vue'
-    yarn build:angular && log 2 1 SUCCESS 'build angular' || log 2 1 ERROR 'build angular'
+    npm i && log 2 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
+    npm run build:r && log 2 1 SUCCESS 'build jquery' || log 2 1 ERROR 'build jquery'
+    npm run build:react && log 2 1 SUCCESS 'build react' || log 2 1 ERROR 'build react'
+    npm run build:vue && log 2 1 SUCCESS 'build vue' || log 2 1 ERROR 'build vue'
+    npm run build:angular && log 2 1 SUCCESS 'build angular' || log 2 1 ERROR 'build angular'
     cd .. && log 2 0 SUCCESS 'go away from ./devextreme'
 }
 
@@ -144,10 +144,10 @@ mkdir ./bundles/angular &&
 
 # Create all bundles
 echo '' >> build_repos.log
-yarn build:jquery && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
-yarn build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
-yarn build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
-yarn build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
+npm run build:jquery && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
+npm run build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
+npm run build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
+npm run build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
 
 # Copy Vue and Angular bundle to playground
 echo '' >> build_repos.log

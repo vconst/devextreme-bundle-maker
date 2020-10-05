@@ -4,7 +4,7 @@
 2. Check the current terminal is `bash`
 3. Run `npm i` to install packages
 4. Open `components.json` and add necessary widget
-5. Run `npm run build:repos` for all bundles create. 
+5. Run `npm run build:repos` for all bundles create. On Unix OS use `sudo`
 
 Check the `bundles` directory after script finish. There should be `NAME-basic.js` and `NAME-renovated.js` bundles in jquery directory and 3 bundles for each another approach: `NAME-native.js`, `NAME-wrapper.js` and `NAME-renovated-wrapper.js`.
 
