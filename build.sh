@@ -8,7 +8,7 @@ update_meta()
 build()
 {
     cd ./$1 && log 3 1 SUCCESS 'go to '$1
-    yarn && log 3 1 SUCCESS 'install packages'
+    yarn && log 3 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
 
     if [[ $1 == *"renovated"* ]]; 
     then
@@ -70,7 +70,7 @@ clone_and_build_repo()
 build_devextreme()
 {
     cd devextreme && log 2 1 SUCCESS 'go to ./devextreme'
-    yarn && log 2 1 SUCCESS 'install packages'
+    yarn && log 2 1 SUCCESS 'install packages' || log 2 1 ERROR 'install packages'
     yarn build:r && log 2 1 SUCCESS 'build jquery' || log 2 1 ERROR 'build jquery'
     yarn build:react && log 2 1 SUCCESS 'build react' || log 2 1 ERROR 'build react'
     yarn build:vue && log 2 1 SUCCESS 'build vue' || log 2 1 ERROR 'build vue'
