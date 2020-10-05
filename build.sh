@@ -103,9 +103,11 @@ log()
 
 # Use sudo on unix OS
 SUDO=""
+SCRIPT_SUFF=""
 if [ $# -ne 0 ];
 then
     SUDO='sudo'
+    SCRIPT_SUFF=':unix'
 fi
 
 # Clear log file
@@ -152,10 +154,11 @@ mkdir ./bundles/angular &&
 
 # Create all bundles
 echo '' >> build_repos.log
-$SUDO npm run build:jquery && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
-$SUDO npm run build:react && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
-$SUDO npm run build:vue && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
-$SUDO npm run build:angular && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
+
+$SUDO npm run build:jquery$SCRIPT_SUFF && log 1 0 SUCCESS 'build jquery bundle' || log 1 0 ERROR 'build jquery bundle'
+$SUDO npm run build:react$SCRIPT_SUFF && log 1 0 SUCCESS 'build react bundle' || log 1 0 ERROR 'build react bundle'
+$SUDO npm run build:vue$SCRIPT_SUFF && log 1 0 SUCCESS 'build vue bundle' || log 1 0 ERROR 'build vue bundle'
+$SUDO npm run build:angular$SCRIPT_SUFF && log 1 0 SUCCESS 'build angular bundle' || log 1 0 ERROR 'build angular bundle'
 
 # Copy Vue and Angular bundle to playground
 echo '' >> build_repos.log
