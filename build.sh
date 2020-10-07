@@ -84,13 +84,13 @@ LOG_FILE=$(pwd)/build_repos.log
 $SUDO echo '' > $LOG_FILE
 
 # Clone and build devextreme
-# git clone https://github.com/DevExpress/DevExtreme devextreme &&
-#     log 1 SUCCESS 'devextreme cloned' ||
-#     log 1 ERROR 'devextreme cloned'
+git clone https://github.com/DevExpress/DevExtreme devextreme &&
+    log 1 SUCCESS 'devextreme cloned' ||
+    log 1 ERROR 'devextreme cloned'
 
-# log 1 START 'devextreme build'
-# build_devextreme
-# log 1 END 'devextreme build'
+log 1 START 'devextreme build'
+build_devextreme
+log 1 END 'devextreme build'
 
 # Clone and build another repos
 echo '' >> $LOG_FILE
