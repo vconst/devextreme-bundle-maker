@@ -2,11 +2,17 @@ clone_and_build_repo()
 {
     REPO=$1$2
 
-    git clone https://github.com/DevExpress/$1 $REPO &&
-        log 3 SUCCESS 'clone '$REPO ||
-        log 3 ERROR 'clone '$REPO
+    if [ ! -d "./"$REPO ];
+    then
+        git clone https://github.com/DevExpress/$1 $REPO &&
+            log 3 SUCCESS 'clone '$REPO ||
+            log 3 ERROR 'clone '$REPO
+    fi
 
     cd ./$REPO && log 3 SUCCESS 'go to '$REPO
+
+    [ -f "./strategy/vue2/package-lock.json" ] && rm ./strategy/vue2/package-lock.json
+    git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
     $SUDO npm i ../devextreme/artifacts/npm/devextreme$3 &&
         log 3 SUCCESS 'update path to devextreme in '$REPO ||
@@ -44,12 +50,14 @@ process_repo()
 build_devextreme()
 {
     cd devextreme && log 2 SUCCESS 'go to ./devextreme'
+    git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
     $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
     $SUDO npm run build:r && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery'
     $SUDO npm run build:react && log 2 SUCCESS 'build react' || log 2 ERROR 'build react'
     $SUDO npm run build:vue && log 2 SUCCESS 'build vue' || log 2 ERROR 'build vue'
     $SUDO npm run build:angular && log 2 SUCCESS 'build angular' || log 2 ERROR 'build angular'
+
     cd .. && log 2 SUCCESS 'go away from ./devextreme'
 }
 
@@ -80,13 +88,19 @@ fi
 # Remember log file absolute path
 LOG_FILE=$(pwd)/build_repos.log
 
+# Clear bundles dir
+[ -d "./bundles" ] && $SUDO rm -r bundles
+
 # Clear log file
 $SUDO echo '' > $LOG_FILE
 
 # Clone and build devextreme
-git clone https://github.com/DevExpress/DevExtreme devextreme &&
-    log 1 SUCCESS 'devextreme cloned' ||
-    log 1 ERROR 'devextreme cloned'
+if [ ! -d "./devextreme" ];
+then
+    git clone https://github.com/DevExpress/DevExtreme devextreme &&
+        log 1 SUCCESS 'devextreme cloned' ||
+        log 1 ERROR 'devextreme cloned'
+fi
 
 log 1 START 'devextreme build'
 build_devextreme
