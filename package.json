@@ -16,7 +16,11 @@
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.2.12",
-    "angular2-template-loader": "^0.6.2"
+    "angular2-template-loader": "^0.6.2",
+    "puppeteer": "^5.5.0",
+    "jest-puppeteer": "^4.4.0",
+    "jest": "^26.6.3",
+    "jest-environment-node": "^26.6.2"
   },
   "scripts": {
     "build:repos": "sh build.sh",
@@ -34,7 +38,8 @@
     "build:jquery:unix": "sudo webpack --profile --json > ./bundles/jquery/jquery-stats.json --config jquery.webpack.config.js",
     "start:react:unix": "cd playground/react-app && sudo npm i && npm run start",
     "start:vue:unix": "cd playground/vue-app && sudo npm i && npm run serve",
-    "start:angular:unix": "cd playground/angular-app && sudo npm i && npm run start"
+    "start:angular:unix": "cd playground/angular-app && sudo npm i && npm run start",
+    "test": "jest"
   },
   "license": "MIT"
 }
