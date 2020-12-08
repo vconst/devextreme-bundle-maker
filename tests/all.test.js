@@ -31,7 +31,7 @@ const measureAction = async (name) => {
 const testPerformance = async (name, demoNames) => {
   const times = [];
   for(let i = 0; i < demoNames.length; i++) {
-    const url = 'file:///' + path.resolve(`playground/jquery/testBundles/${demoNames[i]}.html`);
+    const url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
     await page.goto(url);
     const time = await measureAction(name);
     times.push(+time.toFixed(3));

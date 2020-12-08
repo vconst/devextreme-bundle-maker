@@ -3,12 +3,12 @@ const components = require('./components.json').components;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATH_TO_JQUERY = './playground/jquery/';
-const PATH_TO_TEST_BUNDLES = PATH_TO_JQUERY + 'testBundles/';
+const PATH_TO_HTML = PATH_TO_JQUERY + 'html/';
 
 const configTemplate = {
   mode: 'development',
   output: {
-    path: __dirname + '/playground/jquery/testBundles/',
+    path: __dirname + '/playground/jquery/html/',
   },
   optimization: {
     minimize: false
@@ -16,26 +16,30 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((files, component) => {
+  const pathToComponent = PATH_TO_HTML + component.name;
+  const entry = PATH_TO_JQUERY + component.name + '.js';
+  const filename = component.name + '.test.js'; 
+
   files.push(_.merge({}, configTemplate, {
-    entry: PATH_TO_JQUERY + component.name + '.js',
+    entry,
     output: {
-      filename: component.name + '.test.js',
+      filename,
     },
   }));
 
   files.push(_.merge({}, configTemplate, {
-    entry: PATH_TO_JQUERY + component.name + '.js',
+    entry,
     output: {
-      filename: component.name + '.test.js',
+      filename,
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: component.name + '-basic.html',
-            template: PATH_TO_TEST_BUNDLES + component.name + '-basic.html'
+            template: pathToComponent + '-basic.html'
         }),
         new HtmlWebpackPlugin({
             filename: component.name + '-renovated.html',
-            template: PATH_TO_TEST_BUNDLES + component.name + '-renovated.html'
+            template: pathToComponent + '-renovated.html'
         }),
    ]
   }));

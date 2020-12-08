@@ -3,7 +3,7 @@ const components = require('./components.json').components;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATH_TO_TEMPLATE = './playground/jquery/template.html';
-const PATH_TO_TEST_BUNDLES = '../../playground/jquery/testBundles/';
+const PATH_TO_HTML = '../../playground/jquery/html/';
 
 const configTemplate = {
   devtool: false,
@@ -25,6 +25,8 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
+  const pathToComponent =  PATH_TO_HTML + component.name;
+
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-renovated',
     entry: './devextreme/artifacts/transpiled-renovation-npm/renovation/ui/' + component.name + '.j.js',
@@ -34,7 +36,7 @@ module.exports = components.reduce((bundles, component) => {
     plugins: [
         new HtmlWebpackPlugin({
             minify: false,
-            filename: PATH_TO_TEST_BUNDLES + component.name + '-renovated.html',
+            filename: pathToComponent + '-renovated.html',
             template: PATH_TO_TEMPLATE
         }),
    ]
@@ -48,7 +50,7 @@ module.exports = components.reduce((bundles, component) => {
       plugins: [
           new HtmlWebpackPlugin({
               minify: false,
-              filename: PATH_TO_TEST_BUNDLES + component.name + '-basic.html',
+              filename: pathToComponent + '-basic.html',
               template: PATH_TO_TEMPLATE
           }),
     ]
