@@ -13,8 +13,6 @@ package-lock.json
 build_repos.log
 
 playground/angular-app/src/app/*-native.js
-playground/angular-app/src/app/*-renovated-wrapper.js
 playground/angular-app/src/app/*-wrapper.js
 playground/vue-app/src/components/*-native.js
-playground/vue-app/src/components/*-renovated-wrapper.js
 playground/vue-app/src/components/*-wrapper.js
