@@ -128,7 +128,7 @@ describe('Button', () => {
 describe('CheckBox', () => {
   afterAll(logResults);
   [
-    /*'Minimum options', 
+    'Minimum options', 
     'Maximum options', 
     'With validation message',
     'Option text change',
@@ -136,7 +136,7 @@ describe('CheckBox', () => {
     'Method onFocus',
     'Options full set change',
     'Memory create',
-    'Memory leaks',*/
+    'Memory leaks',
   ].forEach((name) => {
     ['jquery'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {
