@@ -14,9 +14,13 @@ clone_and_build_repo()
     [ -f "./strategy/vue2/package-lock.json" ] && rm ./strategy/vue2/package-lock.json
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
-    $SUDO npm i ../devextreme/artifacts/npm/devextreme$3 &&
+    $SUDO npm i ../devextreme/artifacts/npm/devextreme-renovation &&
         log 3 SUCCESS 'update path to devextreme in '$REPO ||
         log 3 ERROR 'update path to devextreme in '$REPO
+
+    $SUDO npm i devextreme-internal-tools@latest &&
+        log 3 SUCCESS 'update internal tools in '$REPO ||
+        log 3 ERROR 'update internal tools in '$REPO
 
     $SUDO npm i && log 3 SUCCESS 'install packages' || log 3 ERROR 'install packages'
 
@@ -88,6 +92,10 @@ fi
 # Remember log file absolute path
 LOG_FILE=$(pwd)/build_repos.log
 
+# Clear node_modules to aboid problems with Angular building
+[ -f "./node_modules" ] && rm -r node_modules &&
+    log 1 SUCCESS 'node_modules removed'
+
 # Clear bundles dir
 [ -d "./bundles" ] && $SUDO rm -r bundles
 
@@ -117,6 +125,9 @@ log 1 END 'process vue repo'
 log 1 START 'process angular repo'
 process_repo angular
 log 1 END 'process angular repo'
+
+npm i &&
+    log 1 SUCCESS 'packages installed'
 
 # Create directories for bundles
 echo '' >> $LOG_FILE
