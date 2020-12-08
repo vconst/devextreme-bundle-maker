@@ -21,7 +21,8 @@
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.2.12"
+    "webpack-cli": "^3.2.12",
+    "http-server": "^0.12.3"
   },
   "scripts": {
     "build:repos": "sh build.sh",
@@ -40,6 +41,7 @@
     "start:react:unix": "cd playground/react-app && sudo npm i && npm run start",
     "start:vue:unix": "cd playground/vue-app && sudo npm i && npm run serve",
     "start:angular:unix": "cd playground/angular-app && sudo npm i && npm run start",
+    "start:react:prod": "cd playground/react-app && npm i && npm run build && cd build && http-server --port 8001",
     "test": "jest",
     "prepare:tests:jquery": "webpack --config jquery.test.webpack.config.js"
   },

@@ -2,36 +2,78 @@ const path  = require('path');
 
 let testResults = [];
 
+const getMemory = () => {
+  return performance.memory.totalJSHeapSize;
+}
+
 const executeAction = (text) => {
-  var $button = $(`input[value="${text}"]`);
-  if(!$button.length) {
-    throw `Action Button "${text}" is not found`;
+  const button = document.querySelector('input[value="' + text + '"]');
+  if(text && !button) {
+    throw 'Action Button "' + text + '" is not found';
   }
 
-  var startTime = performance.now();
-  $button.click();
-  return performance.now() - startTime;
+  const start = performance.now();
+  button.click();
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      resolve(performance.now() - start);
+    })
+  });
 };
 
+const meeasureMemory = async (name) => {
+  await page._client.send('HeapProfiler.collectGarbage');
+  const start = await page.evaluate(getMemory);
+
+  if(name === 'Memory leaks') {
+    await page.evaluate(executeAction, 'create');
+    await page.evaluate(executeAction, 'clear');
+  } else {
+    await page.evaluate(executeAction, name.replace('Memory ', ''));
+  }
+  await page._client.send('HeapProfiler.collectGarbage');
+
+  const end = await page.evaluate(getMemory);
+  return end - start;
+}
+
 const measureAction = async (name) => {
-  const times = [];
-  for(var i = 0; i < 20; i++) {
+  let times = [];
+  const isMemoryTest = name.indexOf('Memory ') === 0;
+
+  if(isMemoryTest) {
+    await page._client.send('HeapProfiler.enable');
+  }
+
+  for(var i = 0; i < (isMemoryTest ? 3 : 20); i++) {
     await page.evaluate(executeAction, 'clear');
     if(name.indexOf('Option') === 0 || name.indexOf('Method') === 0) {
       await page.evaluate(executeAction, 'create');
     }
-    const val = await page.evaluate(executeAction, name);
+    let val;
+    if(isMemoryTest) {
+      val = await meeasureMemory(name);
+    } else if(name === 'Clear') {
+      await page.evaluate(executeAction, 'create');
+      val = await page.evaluate(executeAction, 'clear');
+    } else {
+      val = await page.evaluate(executeAction, name);
+    }
     times.push(val);
   }
   times.sort((a, b) => a - b);
 
-  return times[0/*Math.floor(times.length / 2)*/];
+  return times[0];
 }
 
-const testPerformance = async (name, demoNames) => {
+const testPerformance = async (name, framework, demoNames) => {
   const times = [];
   for(let i = 0; i < demoNames.length; i++) {
-    const url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
+    let url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
+    if(framework === 'react') {
+      url = `http://localhost:8001/#/${demoNames[i].replace('-', '/')}`;
+    }
+    console.log(name, url);
     await page.goto(url);
     const time = await measureAction(name);
     times.push(+time.toFixed(3));
@@ -45,10 +87,10 @@ const testPerformance = async (name, demoNames) => {
   if(!testResults.length) {
     testResults.push(['name'].concat(demoNames).concat(demoNames.slice(1).map((name) => name + ' diff %')));
   }
-  testResults.push([name].concat(times));
+  testResults.push([name + ' ' + framework].concat(times));
 }
 
-const afterAllHandler = () => {
+const logResults = () => {
   const names = testResults[0];
   console.table(testResults.slice(1).map((times) => {
     const result = {};
@@ -62,7 +104,7 @@ const afterAllHandler = () => {
 };
 
 describe('Button', () => {
-  afterAll(afterAllHandler);
+  afterAll(logResults);
   [
     'Minimum options', 
     'Maximum options', 
@@ -70,28 +112,36 @@ describe('Button', () => {
     'Option icon change',
     'Option text change',
     'Option useInkRipple change',
+    'Options full set change',
     'Method onFocus',
-    'Options full set change'
+    'Memory create',
+    'Memory leaks',
   ].forEach((name) => {
-    it(name, async () => {
-      await testPerformance(name, ['button-basic', 'button-renovated']);
+    ['jquery', 'react'].forEach((framework) => {
+      it(`${name} ${framework}`, async () => {
+        await testPerformance(name, framework, ['button-basic', 'button-renovated']);
+      });
     });
   })
 });
 
 describe('CheckBox', () => {
-  afterAll(afterAllHandler);
+  afterAll(logResults);
   [
-    'Minimum options', 
+    /*'Minimum options', 
     'Maximum options', 
     'With validation message',
     'Option text change',
     'Option useInkRipple change',
     'Method onFocus',
-    'Options full set change'
+    'Options full set change',
+    'Memory create',
+    'Memory leaks',*/
   ].forEach((name) => {
-    it(name, async () => {
-        await testPerformance(name, ['check_box-basic', 'check_box-renovated']);
+    ['jquery'].forEach((framework) => {
+      it(`${name} ${framework}`, async () => {
+        await testPerformance(name, framework, ['check_box-basic', 'check_box-renovated']);
+      });
     });
   })
 });

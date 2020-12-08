@@ -8,7 +8,7 @@ const PATH_TO_HTML = PATH_TO_JQUERY + 'html/';
 const configTemplate = {
   mode: 'development',
   output: {
-    path: __dirname + '/playground/jquery/html/',
+    path: __dirname + '/playground/jquery/html',
   },
   optimization: {
     minimize: false

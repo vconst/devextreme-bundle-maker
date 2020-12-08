@@ -1,6 +1,7 @@
 module.exports = {
   launch: {
-      headless: false, //process.env.HEADLESS !== 'false',
-      devtools: false
+      headless: true, //process.env.HEADLESS !== 'false',
+      devtools: false,
+      args: ['--enable-precise-memory-info']
   }
 }
