@@ -18,3 +18,4 @@ playground/angular-app/src/app/*-wrapper.js
 playground/vue-app/src/components/*-native.js
 playground/vue-app/src/components/*-renovated-wrapper.js
 playground/vue-app/src/components/*-wrapper.js
+playground/jquery/html
