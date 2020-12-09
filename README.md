@@ -2,9 +2,8 @@
 
 1. If you run it not on Windows, you should install [Git bash](https://gitforwindows.org/). You can see how integrate it with VSCode [here](https://stackoverflow.com/questions/42606837/how-do-i-use-bash-on-windows-from-the-visual-studio-code-integrated-terminal)
 2. Check the current terminal is `bash`
-3. Run `npm i` to install packages
-4. Open `components.json` and add necessary widget
-5. Run `npm run build:repos` for all bundles create. On Unix OS use `npm run build:repos:unix`
+3. Open `components.json` and add necessary widget
+4. Run `npm run build:repos` for all bundles create. On Unix OS use `npm run build:repos:unix`
 
 Check the `bundles` directory after script finish. There should be `NAME-basic.js` and `NAME-renovated.js` bundles in jquery directory and 3 bundles for each another approach: `NAME-native.js`, `NAME-wrapper.js` and `NAME-renovated-wrapper.js`.
 
