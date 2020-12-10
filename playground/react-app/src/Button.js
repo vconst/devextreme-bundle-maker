@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+
 import ButtonNative from '../../../bundles/react/button-native';
 import ButtonWrapper from '../../../bundles/react/button-wrapper';
 import ButtonRenovatedWrapper from '../../../bundles/react/button-renovated-wrapper';
+// import ButtonPrev from 'devextreme-react/button';
 
 const RUN_COUNT = 200;
 
@@ -132,7 +134,7 @@ function ButtonPage(props) {
       console.timeEnd(name);
       performance.mark("end")
       performance.measure(name, 'start', 'end');
-    })
+    });
   }, [options]);
 
   return (

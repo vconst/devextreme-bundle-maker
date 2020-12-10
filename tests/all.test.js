@@ -69,9 +69,15 @@ const measureAction = async (name) => {
 const testPerformance = async (name, framework, demoNames) => {
   const times = [];
   for(let i = 0; i < demoNames.length; i++) {
-    let url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
+    let port;
     if(framework === 'react') {
-      url = `http://localhost:8001/#/${demoNames[i].replace('-', '/')}`;
+      port = 8001;
+    } else if(framework === 'vue') {
+      port = 8002;
+    }
+    let url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
+    if(port) {
+      url = `http://localhost:${port}/#/${demoNames[i].replace('-', '/')}`;
     }
     console.log(name, url);
     await page.goto(url);
@@ -117,7 +123,7 @@ describe('Button', () => {
     'Memory create',
     'Memory leaks',
   ].forEach((name) => {
-    ['jquery', 'react'].forEach((framework) => {
+    ['jquery', 'react', 'vue'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {
         await testPerformance(name, framework, ['button-basic', 'button-renovated']);
       });
