@@ -92,10 +92,6 @@ fi
 # Remember log file absolute path
 LOG_FILE=$(pwd)/build_repos.log
 
-# Clear node_modules to aboid problems with Angular building
-[ -f "./node_modules" ] && rm -r node_modules &&
-    log 1 SUCCESS 'node_modules removed'
-
 # Clear bundles dir
 [ -d "./bundles" ] && $SUDO rm -r bundles
 
@@ -125,9 +121,6 @@ log 1 END 'process vue repo'
 log 1 START 'process angular repo'
 process_repo angular
 log 1 END 'process angular repo'
-
-npm i &&
-    log 1 SUCCESS 'packages installed'
 
 # Create directories for bundles
 echo '' >> $LOG_FILE
