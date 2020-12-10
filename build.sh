@@ -14,7 +14,7 @@ clone_and_build_repo()
     [ -f "./strategy/vue2/package-lock.json" ] && rm ./strategy/vue2/package-lock.json
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
-    $SUDO npm i ../devextreme/artifacts/npm/devextreme-renovation &&
+    $SUDO npm i ../devextreme$2/artifacts/npm/devextreme$3 &&
         log 3 SUCCESS 'update path to devextreme in '$REPO ||
         log 3 ERROR 'update path to devextreme in '$REPO
 
@@ -57,12 +57,18 @@ build_devextreme()
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
     $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
-    $SUDO npm run build:r && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery'
+    $SUDO npm run build && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery'
+
+    cd ../devextreme-renovated && log 2 SUCCESS 'go to ./devextreme-renovated'
+    git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
+
+    $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
+    $SUDO npm run build:r && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery renovation'
     $SUDO npm run build:react && log 2 SUCCESS 'build react' || log 2 ERROR 'build react'
     $SUDO npm run build:vue && log 2 SUCCESS 'build vue' || log 2 ERROR 'build vue'
     $SUDO npm run build:angular && log 2 SUCCESS 'build angular' || log 2 ERROR 'build angular'
 
-    cd .. && log 2 SUCCESS 'go away from ./devextreme'
+    cd .. && log 2 SUCCESS 'go away from ./devextreme-renovated'
 }
 
 log() 
@@ -106,6 +112,13 @@ $SUDO echo '' > $LOG_FILE
 if [ ! -d "./devextreme" ];
 then
     git clone https://github.com/DevExpress/DevExtreme devextreme &&
+        log 1 SUCCESS 'devextreme cloned' ||
+        log 1 ERROR 'devextreme cloned'
+fi
+
+if [ ! -d "./devextreme-renovated" ];
+then
+    git clone https://github.com/DevExpress/DevExtreme devextreme-renovated &&
         log 1 SUCCESS 'devextreme cloned' ||
         log 1 ERROR 'devextreme cloned'
 fi

@@ -7,9 +7,9 @@ const configTemplate = {
     path: __dirname + '/bundles/react',
     libraryTarget: 'commonjs2'
   },
-  // optimization: {
-  //   minimize: false
-  // },
+  optimization: {
+     minimize: false
+  },
   externals: {
     'react': 'react',
     'react-dom': 'react-dom'
@@ -33,7 +33,7 @@ module.exports = components.reduce((bundles, component) => {
   }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
-      entry: './devextreme/artifacts/react/renovation/ui/' + component.name + '.tsx',
+      entry: './devextreme-renovated/artifacts/react/renovation/ui/' + component.name + '.tsx',
       output: {
         filename: component.name + '-native.js',
     },

@@ -8,9 +8,9 @@ const configTemplate = {
     path: __dirname + '/bundles/vue',
     libraryTarget: 'commonjs2'
   },
-  // optimization: {
-  //   minimize: false
-  // },
+  optimization: {
+    minimize: false
+  },
   externals: {
     'vue': 'vue',
   },
@@ -33,7 +33,7 @@ module.exports = components.reduce((bundles, component) => {
   }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
-      entry: './devextreme/artifacts/vue/renovation/ui/' + component.name + '.vue',
+      entry: './devextreme-renovated/artifacts/vue/renovation/ui/' + component.name + '.vue',
       output: {
         filename: component.name + '-native.js',
     },

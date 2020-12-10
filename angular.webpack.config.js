@@ -74,7 +74,7 @@ module.exports = components.reduce((bundles, component) => {
   }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
-      entry: './devextreme/artifacts/angular/renovation/ui/' + component.name + '.js',
+      entry: './devextreme-renovated/artifacts/angular/renovation/ui/' + component.name + '.js',
       output: {
         filename: component.name + '-native.js',
     },
