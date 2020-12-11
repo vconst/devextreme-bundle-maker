@@ -17,6 +17,10 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
+  if(component.private) {
+    return;
+  }
+
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-wrapper',
     entry: './devextreme-vue/npm/' + component.wrapperName + '.js',
@@ -33,7 +37,7 @@ module.exports = components.reduce((bundles, component) => {
   }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
-      entry: './devextreme-renovated/artifacts/vue/renovation/ui/' + component.name + '.vue',
+      entry: './devextreme-renovated/artifacts/vue/renovation/' + component.path + '.vue',
       output: {
         filename: component.name + '-native.js',
     },

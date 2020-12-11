@@ -85,11 +85,11 @@ export default {
       this.template = false;
     });
     addPerformanceTest('create', () => {
-      this.options = { text: 'button' };
+      this.options = { text: 'button', icon: undefined, useInkRipple: undefined };
       this.template = false;
     });
     addPerformanceTest('Minimum options', () => {
-      this.options = { text: 'button' };
+      this.options = { text: 'button', icon: undefined, useInkRipple: undefined };
       this.template = false;
     });
     addPerformanceTest('Maximum options', () => {

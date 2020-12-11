@@ -1,6 +1,7 @@
 {
     "components": [
-        { "name": "button", "wrapperName": "button" },
-        { "name": "check_box", "wrapperName": "check-box" }
+        { "name": "button", "wrapperName": "button", "path": "ui/button" },
+        { "name": "check_box", "wrapperName": "check-box", "path": "ui/check_box" },
+        { "name": "pager", "wrapperName": "pager", "path": "ui/pager/pager", "private": true }
       ]
 }

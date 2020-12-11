@@ -24,9 +24,12 @@ const executeAction = (text) => {
 const meeasureMemory = async (name) => {
   await page._client.send('HeapProfiler.collectGarbage');
   const start = await page.evaluate(getMemory);
+  let max = 0;
 
   if(name === 'Memory leaks') {
     await page.evaluate(executeAction, 'create');
+    await page._client.send('HeapProfiler.collectGarbage');
+    max = await page.evaluate(getMemory);
     await page.evaluate(executeAction, 'clear');
   } else {
     await page.evaluate(executeAction, name.replace('Memory ', ''));
@@ -34,7 +37,8 @@ const meeasureMemory = async (name) => {
   await page._client.send('HeapProfiler.collectGarbage');
 
   const end = await page.evaluate(getMemory);
-  return end - start;
+  const diff = end - start;
+  return max ? diff / (max - start) : diff;
 }
 
 const measureAction = async (name) => {
@@ -45,7 +49,7 @@ const measureAction = async (name) => {
     await page._client.send('HeapProfiler.enable');
   }
 
-  for(var i = 0; i < (isMemoryTest ? 3 : 20); i++) {
+  for(var i = 0; i < (isMemoryTest ? 5 : 20); i++) {
     await page.evaluate(executeAction, 'clear');
     if(name.indexOf('Option') === 0 || name.indexOf('Method') === 0) {
       await page.evaluate(executeAction, 'create');
@@ -53,12 +57,16 @@ const measureAction = async (name) => {
     let val;
     if(isMemoryTest) {
       val = await meeasureMemory(name);
+      if(val < 0) {
+        continue;
+      }
     } else if(name === 'Clear') {
       await page.evaluate(executeAction, 'create');
       val = await page.evaluate(executeAction, 'clear');
     } else {
       val = await page.evaluate(executeAction, name);
     }
+
     times.push(val);
   }
   times.sort((a, b) => a - b);
@@ -134,19 +142,33 @@ describe('Button', () => {
 describe('CheckBox', () => {
   afterAll(logResults);
   [
-    'Minimum options', 
-    'Maximum options', 
-    'With validation message',
-    'Option text change',
-    'Option useInkRipple change',
-    'Method onFocus',
-    'Options full set change',
+    'Minimum options',
+    'Option value change',
+    //'Maximum options', 
+    //'With validation message',
+    //'Option text change',
+    //'Option useInkRipple change',
+    //'Method onFocus',
+    //'Options full set change',
     'Memory create',
     'Memory leaks',
   ].forEach((name) => {
-    ['jquery'].forEach((framework) => {
+    ['jquery', 'react', 'vue'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {
         await testPerformance(name, framework, ['check_box-basic', 'check_box-renovated']);
+      });
+    });
+  })
+});
+
+describe('Pager', () => {
+  afterAll(logResults);
+  [
+    'Minimum options', 
+  ].forEach((name) => {
+    ['jquery'].forEach((framework) => {
+      it(`${name} ${framework}`, async () => {
+        await testPerformance(name, framework, ['pager-basic', 'pager-renovated']);
       });
     });
   })

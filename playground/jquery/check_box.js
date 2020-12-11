@@ -1,13 +1,14 @@
 import Tester from './tester';
 
-const tester = new Tester('dxCheckBox', 200, {});
+const tester = new Tester('dxCheckBox', 200, { value: true });
 
 tester.addPerformanceTest('Minimum options', {
-    initialOptions: { text: 'checkBox' }
+    initialOptions: { value: true }
 });
 
 tester.addPerformanceTest('Maximum options', {
     initialOptions: {
+        value: true,
         text: 'checkBox',
         accessKey: 'c',
         activeStateEnabled: true,
@@ -37,6 +38,10 @@ tester.addPerformanceTest('With validation message', {
 
 tester.addPerformanceTest('Option text change', {
     updateOptions: { text: 'New CheckBox Text' }
+});
+
+tester.addPerformanceTest('Option value change', {
+    updateOptions: { value: false }
 });
 
 tester.addPerformanceTest('Option useInkRipple change', {
