@@ -20,6 +20,9 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
+  if(component.private) {
+    return;
+  }
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-wrapper',
     entry: './devextreme-angular/npm/dist/fesm2015/devextreme-angular-ui-' + component.wrapperName + '.js',
@@ -74,7 +77,7 @@ module.exports = components.reduce((bundles, component) => {
   }));
   bundles.push(_.merge({}, configTemplate,{
       name: component.name + '-native',
-      entry: './devextreme-renovated/artifacts/angular/renovation/ui/' + component.name + '.js',
+      entry: './devextreme-renovated/artifacts/angular/renovation/' + component.path + '.js',
       output: {
         filename: component.name + '-native.js',
     },
