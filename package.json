@@ -22,7 +22,8 @@
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.2.12",
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "webpack-bundle-analyzer": "^4.2.0"
   },
   "scripts": {
     "build:repos": "sh build.sh",

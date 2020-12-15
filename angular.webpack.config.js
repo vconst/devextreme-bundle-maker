@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const components = require('./components.json').components;
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const configTemplate = {
   devtool: false,
   output: {
@@ -21,7 +23,7 @@ const configTemplate = {
 
 module.exports = components.reduce((bundles, component) => {
   if(component.private) {
-    return;
+    return bundles;
   }
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-wrapper',
@@ -29,6 +31,13 @@ module.exports = components.reduce((bundles, component) => {
     output: {
       filename: component.name + '-wrapper.js',
     },
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        openAnalyzer: false,
+        reportFilename: component.name + "-wrapper.html"
+      })
+    ],
     module: {
       rules: [
         {
@@ -55,6 +64,13 @@ module.exports = components.reduce((bundles, component) => {
     output: {
       filename: component.name + '-renovated-wrapper.js',
     },
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        openAnalyzer: false,
+        reportFilename: component.name + "-renovated-wrapper.html"
+      })
+    ],
     module: {
       rules: [
         {
@@ -76,11 +92,18 @@ module.exports = components.reduce((bundles, component) => {
     },
   }));
   bundles.push(_.merge({}, configTemplate,{
-      name: component.name + '-native',
-      entry: './devextreme-renovated/artifacts/angular/renovation/' + component.path + '.js',
-      output: {
-        filename: component.name + '-native.js',
+    name: component.name + '-native',
+    entry: './devextreme-renovated/artifacts/angular/renovation/' + component.path + '.js',
+    output: {
+      filename: component.name + '-native.js',
     },
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        openAnalyzer: false,
+        reportFilename: component.name + "-native.html"
+      })
+    ]
   }));
   
   return bundles;
