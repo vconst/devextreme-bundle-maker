@@ -11,7 +11,7 @@ const configTemplate = {
     libraryTarget: 'commonjs2'
   },
   optimization: {
-    minimize: false
+    // minimize: false 
   },
   externals: {
     'vue': 'vue',
@@ -19,38 +19,36 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
-  if(component.private) {
-    return;
+  if(!component.private) {
+    bundles.push(_.merge({}, configTemplate, {
+      name: component.name + '-wrapper',
+      entry: './devextreme-vue/npm/' + component.wrapperName + '.js',
+      output: {
+        filename: component.name + '-wrapper.js',
+      },
+      plugins: [
+        new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+          openAnalyzer: false,
+          reportFilename: component.name + "-wrapper.html"
+        })
+      ],
+    }));
+    bundles.push(_.merge({}, configTemplate, {
+      name: component.name + '-renovated',
+      entry: './devextreme-vue-renovated/npm/' + component.wrapperName + '.js',
+      output: {
+        filename: component.name + '-renovated-wrapper.js',
+      },
+      plugins: [
+        new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+          openAnalyzer: false,
+          reportFilename: component.name + "-renovated-wrapper.html"
+        })
+      ],
+    }));
   }
-
-  bundles.push(_.merge({}, configTemplate, {
-    name: component.name + '-wrapper',
-    entry: './devextreme-vue/npm/' + component.wrapperName + '.js',
-    output: {
-      filename: component.name + '-wrapper.js',
-    },
-    plugins: [
-      new BundleAnalyzerPlugin({
-        analyzerMode: "static",
-        openAnalyzer: false,
-        reportFilename: component.name + "-wrapper.html"
-      })
-    ],
-  }));
-  bundles.push(_.merge({}, configTemplate, {
-    name: component.name + '-renovated',
-    entry: './devextreme-vue-renovated/npm/' + component.wrapperName + '.js',
-    output: {
-      filename: component.name + '-renovated-wrapper.js',
-    },
-    plugins: [
-      new BundleAnalyzerPlugin({
-        analyzerMode: "static",
-        openAnalyzer: false,
-        reportFilename: component.name + "-renovated-wrapper.html"
-      })
-    ],
-  }));
   bundles.push(_.merge({}, configTemplate,{
     name: component.name + '-native',
     entry: './devextreme-renovated/artifacts/vue/renovation/' + component.path + '.vue',

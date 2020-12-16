@@ -1,5 +1,6 @@
 node_modules
 devextreme
+devextreme-renovated
 devextreme-react
 devextreme-vue
 devextreme-vue-renovated
@@ -11,6 +12,7 @@ yarn.lock
 package-lock.json
 
 build_repos.log
+build_spike.log
 
 playground/angular-app/src/app/*-native.js
 playground/angular-app/src/app/*-wrapper.js
