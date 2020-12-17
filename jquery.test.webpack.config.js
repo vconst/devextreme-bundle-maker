@@ -32,7 +32,11 @@ module.exports = components.reduce((files, component) => {
     output: {
       filename,
     },
-    plugins: [
+    plugins: component.spike ? [
+      new HtmlWebpackPlugin({
+          filename: component.name + '.html',
+          template: pathToComponent + '.html'
+      })] : [
         new HtmlWebpackPlugin({
             filename: component.name + '-basic.html',
             template: pathToComponent + '-basic.html'

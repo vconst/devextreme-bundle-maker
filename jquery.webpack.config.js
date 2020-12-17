@@ -28,45 +28,48 @@ const configTemplate = {
 
 module.exports = components.reduce((bundles, component) => {
   const pathToComponent =  PATH_TO_HTML + component.name;
+  const renovatedPostFix = component.spike ? '' : '-renovate';
 
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-renovated',
     entry: './devextreme-renovated/artifacts/transpiled-renovation-npm/renovation/' + component.path + '.j.js',
     output: {
-      filename: component.name + '-renovated.js',
+      filename: component.name + renovatedPostFix + '.js',
     },  
     plugins: [
         new HtmlWebpackPlugin({
             minify: false,
-            filename: pathToComponent + '-renovated.html',
+            filename: pathToComponent + renovatedPostFix + '.html',
             template: PATH_TO_TEMPLATE
         }),
         new BundleAnalyzerPlugin({
           analyzerMode: "static",
           openAnalyzer: false,
-          reportFilename: component.name + "-renovated.html"
+          reportFilename: component.name + renovatedPostFix + ".html"
         })
    ]
   }));
-  bundles.push(_.merge({}, configTemplate,{
-      name: component.name + '-basic',
-      entry: './devextreme/artifacts/transpiled/ui/' + component.name + '.js',
-      output: {
-        filename: component.name + '-basic.js',
-      },
-      plugins: [
-        new HtmlWebpackPlugin({
-            minify: false,
-            filename: pathToComponent + '-basic.html',
-            template: PATH_TO_TEMPLATE
-        }),
-        new BundleAnalyzerPlugin({
-          analyzerMode: "static",
-          openAnalyzer: false,
-          reportFilename: component.name + "-basic.html"
-        })
-    ]
-  }));
+  if(!component.spike) {
+    bundles.push(_.merge({}, configTemplate,{
+        name: component.name + '-basic',
+        entry: './devextreme/artifacts/transpiled/ui/' + component.name + '.js',
+        output: {
+          filename: component.name + '-basic.js',
+        },
+        plugins: [
+          new HtmlWebpackPlugin({
+              minify: false,
+              filename: pathToComponent + '-basic.html',
+              template: PATH_TO_TEMPLATE
+          }),
+          new BundleAnalyzerPlugin({
+            analyzerMode: "static",
+            openAnalyzer: false,
+            reportFilename: component.name + "-basic.html"
+          })
+      ]
+    }));
+  }
   
   return bundles;
 }, []);

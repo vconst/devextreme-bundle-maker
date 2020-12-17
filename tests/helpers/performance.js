@@ -74,7 +74,7 @@ const measureAction = async (name) => {
   return times[0];
 }
 
-const testPerformance = async (name, framework, demoNames) => {
+exports.testPerformance = async (name, framework, demoNames) => {
   const times = [];
   for(let i = 0; i < demoNames.length; i++) {
     let port;
@@ -104,7 +104,7 @@ const testPerformance = async (name, framework, demoNames) => {
   testResults.push([name + ' ' + framework].concat(times));
 }
 
-const logResults = () => {
+exports.logResults = () => {
   const names = testResults[0];
   console.table(testResults.slice(1).map((times) => {
     const result = {};
@@ -116,60 +116,3 @@ const logResults = () => {
 
   testResults = [];
 };
-
-describe('Button', () => {
-  afterAll(logResults);
-  [
-    'Minimum options', 
-    'Maximum options', 
-    'With template',
-    'Option icon change',
-    'Option text change',
-    'Option useInkRipple change',
-    'Options full set change',
-    'Method onFocus',
-    'Memory create',
-    'Memory leaks',
-  ].forEach((name) => {
-    ['jquery', 'react', 'vue'].forEach((framework) => {
-      it(`${name} ${framework}`, async () => {
-        await testPerformance(name, framework, ['button-basic', 'button-renovated']);
-      });
-    });
-  })
-});
-
-describe('CheckBox', () => {
-  afterAll(logResults);
-  [
-    'Minimum options',
-    'Option value change',
-    //'Maximum options', 
-    //'With validation message',
-    //'Option text change',
-    //'Option useInkRipple change',
-    //'Method onFocus',
-    //'Options full set change',
-    'Memory create',
-    'Memory leaks',
-  ].forEach((name) => {
-    ['jquery', 'react', 'vue'].forEach((framework) => {
-      it(`${name} ${framework}`, async () => {
-        await testPerformance(name, framework, ['check_box-basic', 'check_box-renovated']);
-      });
-    });
-  })
-});
-
-describe('Pager', () => {
-  afterAll(logResults);
-  [
-    'Minimum options', 
-  ].forEach((name) => {
-    ['jquery'].forEach((framework) => {
-      it(`${name} ${framework}`, async () => {
-        await testPerformance(name, framework, ['pager-basic', 'pager-renovated']);
-      });
-    });
-  })
-});

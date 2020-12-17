@@ -1,5 +1,4 @@
-const path  = require('path');
-var fs = require("fs");
+const fs = require("fs");
 
 const testResults = [];
 
@@ -48,7 +47,7 @@ describe('Bundle sizes', () => {
     'button', 
     'check_box',
     'pager'
-  ].forEach((widget, widgetIndex) => {
+  ].forEach((widget) => {
     ['jquery', 'angular', 'react', 'vue'].forEach((framework) => {
       if(framework !== 'jquery' && widget === 'pager') {
         return;

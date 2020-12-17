@@ -1,0 +1,7 @@
+{
+  "name": "spike",
+  "version": "1.0.0",
+  "devDependencies": {
+    "devextreme-generator": "^1.0.135"
+  }
+}

@@ -49,17 +49,20 @@ module.exports = components.reduce((bundles, component) => {
       ],
     }));
   }
+
+  const nativePostfix = component.spike ? '' : '-native';
+
   bundles.push(_.merge({}, configTemplate,{
     name: component.name + '-native',
     entry: './devextreme-renovated/artifacts/vue/renovation/' + component.path + '.vue',
     output: {
-      filename: component.name + '-native.js',
+      filename: component.name + nativePostfix + '.js',
     },
     plugins: [
       new BundleAnalyzerPlugin({
         analyzerMode: "static",
         openAnalyzer: false,
-        reportFilename: component.name + "-native.html"
+        reportFilename: component.name + nativePostfix + ".html"
       })
     ],
     module: {
