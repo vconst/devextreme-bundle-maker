@@ -85,7 +85,7 @@ exports.testPerformance = async (name, framework, demoNames) => {
     }
     let url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
     if(port) {
-      url = `http://localhost:${port}/#/${demoNames[i].replace('-', '/')}`;
+      url = `http://127.0.0.1:${port}/#/${demoNames[i].replace('-', '/')}`;
     }
     console.log(name, url);
     await page.goto(url);
