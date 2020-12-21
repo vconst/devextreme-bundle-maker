@@ -19,6 +19,12 @@ jobs:
     - name: Build repos
       run: npm run build:repos
 
+    - name: Start react app
+      run: npm run start:react:prod &
+
+    - name: Start vue app
+      run: npm run start:vue:prod &
+
     - name: Run tests
       run: npm run test
 
