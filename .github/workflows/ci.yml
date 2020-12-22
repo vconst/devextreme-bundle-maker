@@ -19,15 +19,6 @@ jobs:
     - name: Build repos
       run: npm run build:repos
 
-    - name: Build jquery
-      run: npm run build:jquery
-
-    - name: Build react
-      run: npm run build:react
-
-    - name: Build vue
-      run: npm run build:vue
-
     - name: Build angular
       run: npm run build:angular
 
@@ -37,7 +28,7 @@ jobs:
         npm i
         CI=false npm run build
         cd build
-        http-server --port 8001 &
+        npx http-server --port 8001 &
         sleep 5
 
     - name: Start vue app
@@ -46,7 +37,7 @@ jobs:
         npm i
         CI=false npm run build
         cd dist
-        http-server --port 8002 &
+        npx http-server --port 8002 &
         sleep 5
 
     - name: Run tests
