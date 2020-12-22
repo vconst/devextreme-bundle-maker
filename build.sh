@@ -62,7 +62,7 @@ build_devextreme()
     cd ../devextreme-renovated && log 2 SUCCESS 'go to ./devextreme-renovated'
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
-    cp -r ./spike/js/renovation/spike/ ./devextreme-renovated/js/renovation/spike/ &&
+    cp -r ../spike/js/renovation/spike/ ./js/renovation/spike/ &&
         log 1 SUCCESS 'spike copied to devextreme-renovated' ||
         log 1 ERROR 'spike copied to devextreme-renovated'
 

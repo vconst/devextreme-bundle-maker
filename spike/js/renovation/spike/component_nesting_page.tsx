@@ -4,10 +4,6 @@ import {
   JSXComponent
 } from 'devextreme-generator/component_declaration/common';
 
-function render(i: number) {
-  return <div key={i}>{i.toString()}</div>;
-}
-
 import { OneLevel } from './component_nesting/one_level';
 import { TwoLevel } from './component_nesting/two_level';
 import { ThreeLevel } from './component_nesting/three_level';
@@ -24,9 +20,6 @@ function viewFunction({
          {type === 'inline' && items.map((i) => 
           <div key={i}>{i.toString()}</div>
          )} 
-         {type === 'render function' && items.map((i) => 
-          render(i)
-         )}
          {type === 'one level' && items.map((i) => 
           <OneLevel key={i} text={i.toString()} />
          )}
@@ -52,9 +45,9 @@ class ComponentNestingPageProps {
   },
 })
 export class ComponentNestingPage extends JSXComponent(ComponentNestingPageProps) {
-  types = ['clear', 'inline', 'render function', 'one level', 'two level', 'three level'];
+  types = ['clear', 'inline', 'one level', 'two level', 'three level'];
   type: string = '';
-  items = Array.from({ length: 10000 }).map((_, i) => i);
+  items = Array.from({ length: 20000 }).map((_, i) => i);
   click(type: string): void {
     this.type = type;
   }
