@@ -32,10 +32,22 @@ jobs:
       run: npm run build:angular
 
     - name: Start react app
-      run: npm run start:react:prod &> playground.react.log &
+      run: |
+        cd playground/react-app
+        npm i
+        CI=false npm run build
+        cd build
+        http-server --port 8001 &
+        sleep 5
 
     - name: Start vue app
-      run: npm run start:vue:prod &> playground.vue.log &
+      run: |
+        cd playground/vue-app
+        npm i
+        CI=false npm run build
+        cd dist
+        http-server --port 8002 &
+        sleep 5
 
     - name: Run tests
       run: npm run test
