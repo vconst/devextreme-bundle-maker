@@ -28,7 +28,7 @@ const configTemplate = {
 
 module.exports = components.reduce((bundles, component) => {
   const pathToComponent =  PATH_TO_HTML + component.name;
-  const renovatedPostFix = component.spike ? '' : '-renovate';
+  const renovatedPostFix = component.spike ? '' : '-renovated';
 
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-renovated',
