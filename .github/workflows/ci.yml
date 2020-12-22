@@ -20,7 +20,7 @@ jobs:
       run: npm run build:repos
 
     - name: Build jquery
-      run: npm run build:jquery
+      run: npm run build:jquery:log
 
     - name: Build react
       run: npm run build:react
