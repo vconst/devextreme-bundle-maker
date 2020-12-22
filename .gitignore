@@ -15,8 +15,8 @@ package-lock.json
 
 playground/angular-app/src/app/*-native.js
 playground/angular-app/src/app/*-wrapper.js
-playground/angular-app/src/app/*-page.js
+playground/angular-app/src/app/*_page.js
 playground/vue-app/src/components/*-native.js
 playground/vue-app/src/components/*-wrapper.js
-playground/vue-app/src/components/*-page.js
+playground/vue-app/src/components/*_page.js
 playground/jquery/html
