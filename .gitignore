@@ -11,11 +11,12 @@ bundles
 yarn.lock
 package-lock.json
 
-build_repos.log
-build_spike.log
+*.log
 
 playground/angular-app/src/app/*-native.js
 playground/angular-app/src/app/*-wrapper.js
+playground/angular-app/src/app/*-page.js
 playground/vue-app/src/components/*-native.js
 playground/vue-app/src/components/*-wrapper.js
+playground/vue-app/src/components/*-page.js
 playground/jquery/html
