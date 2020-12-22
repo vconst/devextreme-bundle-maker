@@ -20,15 +20,15 @@ jobs:
       run: npm run build:repos
 
     - name: Build jquery
-      run: npm run build:jquery:log
+      run: npm run build:jquery
 
     - name: Build react
       run: npm run build:react
 
-    - name: Build vue
-      run: npm run build:vue
+#    - name: Build vue
+#      run: npm run build:vue
 
-    - name: Build angulat
+    - name: Build angular
       run: npm run build:angular
 
     - name: Start react app

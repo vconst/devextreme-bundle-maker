@@ -62,6 +62,10 @@ build_devextreme()
     cd ../devextreme-renovated && log 2 SUCCESS 'go to ./devextreme-renovated'
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
+    cp -r ./spike/js/renovation/spike/ ./devextreme-renovated/js/renovation/spike/ &&
+        log 1 SUCCESS 'spike copied to devextreme-renovated' ||
+        log 1 ERROR 'spike copied to devextreme-renovated'
+
     $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
     $SUDO npm run build:r && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery renovation'
     $SUDO npm run build:react && log 2 SUCCESS 'build react' || log 2 ERROR 'build react'
