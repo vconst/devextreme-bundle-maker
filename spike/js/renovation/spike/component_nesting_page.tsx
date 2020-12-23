@@ -47,7 +47,7 @@ class ComponentNestingPageProps {
 export class ComponentNestingPage extends JSXComponent(ComponentNestingPageProps) {
   types = ['clear', 'inline', 'one level', 'two level', 'three level'];
   type: string = '';
-  items = Array.from({ length: 20000 }).map((_, i) => i);
+  items = Array.from({ length: 10000 }).map((_, i) => i);
   click(type: string): void {
     this.type = type;
   }
