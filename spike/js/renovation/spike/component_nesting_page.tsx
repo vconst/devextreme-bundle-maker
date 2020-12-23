@@ -49,6 +49,15 @@ export class ComponentNestingPage extends JSXComponent(ComponentNestingPageProps
   type: string = '';
   items = Array.from({ length: 5000 }).map((_, i) => i);
   click(type: string): void {
+    performance.mark("start");
+    console.time(name);
+
     this.type = type;
+
+    requestAnimationFrame(() => {
+      console.timeEnd(name);
+      performance.mark("end")
+      performance.measure(name, 'start', 'end');
+    });
   }
 }

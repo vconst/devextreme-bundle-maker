@@ -32,13 +32,11 @@ export class ToolbarItem extends JSXComponent(ToolbarOtemProps) {
   inputRef!: HTMLDivElement;
   
   click(e: any): void {
-    debugger
     this.props.onClick?.(e.target.value);
   }
 
   @Effect()
   clickEffect(): () => void {
-    debugger
     this.inputRef.addEventListener('click', this.click);
     return (): void => this.inputRef.removeEventListener('click', this.click);
   }

@@ -4,11 +4,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
-enableProdMode();
+import { DxComponentNestingPageModule, DxComponentNestingPageComponent } from './component_nesting_page';
 
-// import { DxButtonModule } from './button-native';
-// import { DxButtonModule } from './button-wrapper';
-// import { DxButtonModule } from './button-renovated-wrapper';
+
+enableProdMode();
 
 const routes: Routes = [
   { 
@@ -26,7 +25,11 @@ const routes: Routes = [
     loadChildren: () => (
       import('./button-native.module'
     )).then(m => m.ButtonNativeModule)
+  }, {
+    path: 'component_nesting_page',
+    component: DxComponentNestingPageComponent
   }
+
 ];
 
 @NgModule({
@@ -36,7 +39,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    //DxButtonModule
+    DxComponentNestingPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

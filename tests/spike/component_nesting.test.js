@@ -8,7 +8,7 @@ describe('Component Nesting', () => {
     'two level',
     'three level',
   ].forEach((name) => {
-     ['jquery', 'react', 'vue'].forEach((framework) => {
+     ['jquery', 'react', 'vue', 'angular'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {
         await testPerformance(name, framework, ['component_nesting_page']);
       });
