@@ -16,7 +16,7 @@ const executeAction = (text) => {
   const start = performance.now();
   button.click();
   return new Promise((resolve) => {
-    requestAnimationFrame(() => {
+    requestIdleCallback(() => {
       resolve(performance.now() - start);
     })
   });

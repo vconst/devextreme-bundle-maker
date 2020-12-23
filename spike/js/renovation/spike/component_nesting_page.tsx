@@ -54,7 +54,7 @@ export class ComponentNestingPage extends JSXComponent(ComponentNestingPageProps
 
     this.type = type;
 
-    requestAnimationFrame(() => {
+    window['requestIdleCallback'](() => {
       console.timeEnd(type);
       performance.mark("end")
       performance.measure(type, 'start', 'end');
