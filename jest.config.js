@@ -3,9 +3,10 @@ module.exports = {
   globals: {
     URL: "http://localhost:8080"
   },
+  rootDir: "tests",
   testMatch: [
-    "<rootDir>/tests/*.test.js",
-    "<rootDir>/tests/**/*.test.js",
+    "<rootDir>/*.test.js",
+    "<rootDir>/**/*.test.js",
   ],
   verbose: true,
   testTimeout: 30000

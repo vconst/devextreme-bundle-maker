@@ -1,6 +1,8 @@
+const { logResults, log } = require('./helpers/performance');
+
 const fs = require("fs");
 
-const testResults = [];
+log(['name', 'basic', 'renovated', 'native', 'renovated %', 'native %']);
 
 const testBundle = (widgetName, framework, bundlePostfixes) => {
   const times = [];
@@ -21,25 +23,8 @@ const testBundle = (widgetName, framework, bundlePostfixes) => {
     times.push(Math.round((ratio - 1) * 100));
   }
 
-  if(!testResults.length) {
-    testResults.push(['name', 'basic', 'renovated', 'native', 'renovated %', 'native %']);
-  }
-  testResults.push([widgetName + ' ' + framework].concat(times));
+  log([widgetName + ' size ' + framework].concat(times));
 }
-
-const logResults = () => {
-  const names = testResults[0];
-  console.log(testResults);
-  console.table(testResults.slice(1).map((times) => {
-    const result = {};
-    names.forEach((name, index) => {
-      result[name] = times[index] ?? 0;
-    })
-    return result;
-  }));
-
-  testResults = [];
-};
 
 describe('Bundle sizes', () => {
   afterAll(logResults);

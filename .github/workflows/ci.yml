@@ -44,7 +44,7 @@ jobs:
       run: npm run test
 
     - name: Copy artifacts
-      if: ${{ failure() }}
+      if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
         name: logs

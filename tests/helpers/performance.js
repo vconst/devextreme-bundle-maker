@@ -1,4 +1,5 @@
 const path  = require('path');
+const fs = require('fs');
 
 let testResults = [];
 
@@ -104,6 +105,10 @@ exports.testPerformance = async (name, framework, demoNames) => {
   testResults.push([name + ' ' + framework].concat(times));
 }
 
+exports.log = (values) => {
+  testResults.push(values);
+}
+
 exports.logResults = () => {
   const names = testResults[0];
   console.table(testResults.slice(1).map((times) => {
@@ -113,6 +118,29 @@ exports.logResults = () => {
     })
     return result;
   }));
+
+  if(testResults.length > 1) {
+    const columns = testResults[0].map((name, index) => ({ align: index === 0 ? 'left' : 'right' }));
+
+    columns.forEach((column, index) => {
+      column.length = testResults
+        .map(values => values[index]?.toString().length || 0)
+        .reduce((a, b) => Math.max(a, b), 0);
+    });
+
+    const formattedResult = testResults.map((values, rowIndex) => {
+      return values.map((value, columnIndex) => {
+        const column = columns[columnIndex];
+        const valueText = value.toString();
+        const text = column.align === 'right' ? valueText.padStart(column.length, ' ') : valueText.padEnd(column.length, ' ');
+        return text;
+      }).join('  ') + (rowIndex === 0 ? '\n' : '');
+    }).join('\n') + '\n\n\n';
+
+    console.log(formattedResult);
+
+    fs.appendFileSync('results.log', formattedResult);
+  }
 
   testResults = [];
 };

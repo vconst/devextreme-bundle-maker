@@ -10,8 +10,8 @@ Vue.config.performance = false;
 
 import Button from './components/Button.vue'
 import CheckBox from './components/CheckBox.vue'
-import { DataGridLightPage } from './components/data_grid_light_page';
-import { ComponentNestingPage } from './components/component_nesting_page';
+import DataGridLightPage from './components/data_grid_light_page';
+import ComponentNestingPage from './components/component_nesting_page';
 
 
 const routes = [
