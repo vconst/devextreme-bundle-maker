@@ -14,7 +14,7 @@ describe('Button', () => {
     'Memory create',
     'Memory leaks',
   ].forEach((name) => {
-    ['jquery', 'react', 'vue'].forEach((framework) => {
+    ['jquery', 'react', 'vue', 'angular'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {
         await testPerformance(name, framework, ['button-basic', 'button-renovated']);
       });

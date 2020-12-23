@@ -1,22 +1,12 @@
 import { Component, ViewChildren } from '@angular/core';
-import { DxButtonComponent } from './button-native';
+// import { DxButtonComponent } from './button-native';
 // import { DxButtonComponent } from './button-wrapper';
 // import { DxButtonComponent } from './button-renovated-wrapper';
 
-let observer = new MutationObserver(mutationRecords => {
-  console.log(mutationRecords);
-  (console as any).timeLog('Time');
-});
+
 
 const startTime = () => {
-  console.clear();
-  observer.observe(document.getElementById('root'), {
-    childList: true,
-    subtree: true,
-    characterDataOldValue: true,
-    attributes: true,
-  });
-  console.time('Time');
+
 };
 
 @Component({

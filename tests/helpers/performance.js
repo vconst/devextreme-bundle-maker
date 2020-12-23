@@ -83,6 +83,8 @@ exports.testPerformance = async (name, framework, demoNames) => {
       port = 8001;
     } else if(framework === 'vue') {
       port = 8002;
+    } else if(framework === 'angular') {
+      port = 4200;
     }
     let url = 'file:///' + path.resolve(`playground/jquery/html/${demoNames[i]}.html`);
     if(port) {

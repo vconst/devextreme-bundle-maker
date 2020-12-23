@@ -41,6 +41,15 @@ jobs:
         npx http-server --port 8002 &
         sleep 5
 
+    - name: Start angular app
+      run: |
+        cd playground/angular-app
+        npm i
+        npm run build
+        cd dist/custombundleangular8
+        npx http-server --port 4200 &
+        sleep 5
+
     - name: Run tests
       run: npm run test
 

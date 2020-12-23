@@ -1,0 +1,46 @@
+<div class="test-buttons">
+  <input
+    *ngFor="let test of testButtons"
+    type="button"
+    [value]="test.name"
+    (click)="test.func()"
+  />
+</div>
+<div class="workspace">
+  <ng-container *ngIf="options && template">
+    <dx-button
+      #button
+      *ngFor="let key of keys"
+      [text]="options.text"
+    >
+      <div>Button Template</div>
+    </dx-button>
+  </ng-container>
+  <ng-container *ngIf="options && options.onClick">
+    <dx-button
+      #button
+      *ngFor="let key of keys"
+      [text]="options.text"
+      [icon]="options.icon"
+      [accessKey]="options.accessKey"
+      [activeStateEnabled]="options.activeStateEnabled"
+      [disabled]="options.disabled"
+      [hint]="options.hint"
+      [rtlEnabled]="options.rtlEnabled"
+      [tabIndex]="options.tabIndex"
+      [width]="options.width"
+      [height]="options.height"
+      (onClick)="options.onClick()"
+    >
+    </dx-button>
+  </ng-container>
+  <ng-container *ngIf="options && !options.onClick">
+    <dx-button
+      #button
+      *ngFor="let key of keys"
+      [text]="options.text"
+      [icon]="options.icon"
+    >
+    </dx-button>
+  </ng-container>
+</div>

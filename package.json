@@ -45,8 +45,9 @@
     "start:react:unix": "cd playground/react-app && sudo npm i && npm run start",
     "start:vue:unix": "cd playground/vue-app && sudo npm i && npm run serve",
     "start:angular:unix": "cd playground/angular-app && sudo npm i && npm run start",
-    "start:react:prod": "cd playground/react-app && npm i && CI=false npm run build && cd build && http-server --port 8001",
-    "start:vue:prod": "cd playground/vue-app && npm i && CI=false npm run build && cd dist && http-server --port 8002",
+    "start:react:prod": "cd playground/react-app && npm i && CI=false npm run build && cd build && http-server -c-1 --port 8001",
+    "start:vue:prod": "cd playground/vue-app && npm i && CI=false npm run build && cd dist && http-server -c-1 --port 8002",
+    "start:angular:prod": "cd playground/angular-app && npm i && npm run build && cd dist/custombundleangular8 && http-server -c-1 --port 4200",
     "test": "jest",
     "prepare:tests:jquery": "webpack --config jquery.test.webpack.config.js"
   },
