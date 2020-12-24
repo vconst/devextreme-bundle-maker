@@ -79,7 +79,7 @@ function CheckBoxPage(props) {
         instance[methodName]();
       });
     }
-    window['requestIdleCallback'](() => {
+    window['setTimeout'](() => {
       console.timeEnd(name);
       performance.mark("end")
       performance.measure(name, 'start', 'end');

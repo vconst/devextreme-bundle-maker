@@ -16,7 +16,7 @@ const executeAction = (text) => {
   const start = performance.now();
   button.click();
   return new Promise((resolve) => {
-    requestIdleCallback(() => {
+    window['setTimeout'](() => {
       resolve(performance.now() - start);
     })
   });

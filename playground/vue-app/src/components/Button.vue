@@ -72,7 +72,7 @@ export default {
         performance.mark("start");
         console.time(name);
         func();
-        window['requestIdleCallback'](() => {
+        window['setTimeout'](() => {
           console.timeEnd(name);
           performance.mark("end")
           performance.measure(name, 'start', 'end');
