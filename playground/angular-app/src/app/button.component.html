@@ -16,7 +16,7 @@
       <div>Button Template</div>
     </dx-button>
   </ng-container>
-  <ng-container *ngIf="options && options.onClick">
+  <ng-container *ngIf="options && !template && options.onClick">
     <dx-button
       #button
       *ngFor="let key of keys"
@@ -34,7 +34,7 @@
     >
     </dx-button>
   </ng-container>
-  <ng-container *ngIf="options && !options.onClick">
+  <ng-container *ngIf="options && !template && !options.onClick">
     <dx-button
       #button
       *ngFor="let key of keys"
