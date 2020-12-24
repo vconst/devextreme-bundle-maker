@@ -30,6 +30,10 @@ module.exports = components.reduce((bundles, component) => {
   const pathToComponent =  PATH_TO_HTML + component.name;
   const renovatedPostFix = component.spike ? '' : '-renovated';
 
+  if(component.frameworks && component.frameworks.indexOf('jquery') < 0) {
+    return bundles;
+  }
+
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-renovated',
     entry: './devextreme-renovated/artifacts/transpiled-renovation-npm/renovation/' + component.path + '.j.js',

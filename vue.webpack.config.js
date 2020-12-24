@@ -19,6 +19,10 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
+  if(component.frameworks && component.frameworks.indexOf('vue') < 0) {
+    return bundles;
+  }
+
   if(!component.private) {
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-wrapper',

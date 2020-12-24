@@ -16,6 +16,9 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((files, component) => {
+  if(component.frameworks && component.frameworks.indexOf('jquery') < 0) {
+    return files;
+  }
   const pathToComponent = PATH_TO_HTML + component.name;
   const entry = PATH_TO_JQUERY + component.name + '.js';
   const filename = component.name + '.test.js'; 

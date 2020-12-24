@@ -4,6 +4,7 @@
         { "name": "check_box", "wrapperName": "check-box", "path": "ui/check_box" },
         { "name": "pager", "wrapperName": "pager", "path": "ui/pager/pager", "private": true },
         { "name": "data_grid_light_page", "wrapperName": "data_grid_light_page",  "path": "spike/data_grid_light_page", "private": true, "spike": true },
-        { "name": "component_nesting_page", "wrapperName": "component_nesting_page",  "path": "spike/component_nesting_page", "private": true, "spike": true }
+        { "name": "component_nesting_page", "wrapperName": "component_nesting_page",  "path": "spike/component_nesting_page", "private": true, "spike": true },
+        { "name": "plugins_page", "wrapperName": "plugins_page",  "path": "spike/plugins_page", "private": true, "spike": true, "frameworks": ["react"] }
     ]
 }
