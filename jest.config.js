@@ -9,5 +9,5 @@ module.exports = {
     "<rootDir>/**/*.test.js",
   ],
   verbose: true,
-  testTimeout: 30000
+  testTimeout: 60000
 }
