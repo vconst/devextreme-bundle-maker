@@ -20,7 +20,7 @@ export class ButtonComponent {
         performance.mark("start");
         console.time(name);
         func();
-        window['setTimeout'](() => {
+        window['requestIdleCallback'](() => {
           console.timeEnd(name);
           performance.mark("end")
           performance.measure(name, 'start', 'end');
