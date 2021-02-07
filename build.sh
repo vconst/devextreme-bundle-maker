@@ -1,5 +1,6 @@
 clone_and_build_repo()
 {
+    REPOBASE=$1
     REPO=$1$2
 
     if [ ! -d "./"$REPO ];
@@ -9,14 +10,19 @@ clone_and_build_repo()
             log 3 ERROR 'clone '$REPO
     fi
 
-    cd ./$REPO && log 3 SUCCESS 'go to '$REPO
+    cd ./$REPO/packages/$REPOBASE-generator && log 3 SUCCESS 'go to '$REPO/packages/$REPOBASE-generator || log 3 ERROR 'go to '$REPO/packages/$REPO-generator
 
-    [ -f "./strategy/vue2/package-lock.json" ] && rm ./strategy/vue2/package-lock.json
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
-    $SUDO npm i ../devextreme$2/artifacts/npm/devextreme$3 &&
+    cd ../$REPOBASE && log 3 SUCCESS 'go to '$REPO/packages/$REPOBASE || log 3 ERROR 'go to '$REPO/packages/$REPOBASE
+
+    git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
+
+    $SUDO npm i ../../../devextreme$2/artifacts/npm/devextreme$3 &&
         log 3 SUCCESS 'update path to devextreme in '$REPO ||
         log 3 ERROR 'update path to devextreme in '$REPO
+
+    cd ../.. && log 3 SUCCESS 'go to '$REPO || log 3 ERROR 'go to '$REPO
 
     $SUDO npm i devextreme-internal-tools@latest &&
         log 3 SUCCESS 'update internal tools in '$REPO ||
