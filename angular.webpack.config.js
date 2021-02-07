@@ -26,7 +26,7 @@ module.exports = components.reduce((bundles, component) => {
   if(!component.private) {
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-wrapper',
-      entry: './devextreme-angular/npm/dist/fesm2015/devextreme-angular-ui-' + component.wrapperName + '.js',
+      entry: './devextreme-angular/packages/devextreme-angular/npm/dist/fesm2015/devextreme-angular-ui-' + component.wrapperName + '.js',
       output: {
         filename: component.name + '-wrapper.js',
       },
@@ -59,7 +59,7 @@ module.exports = components.reduce((bundles, component) => {
     }));
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-renovated',
-      entry: './devextreme-angular-renovated/npm/dist/fesm2015/devextreme-angular-ui-' + component.wrapperName + '.js',
+      entry: './devextreme-angular-renovated/packages/devextreme-angular/npm/dist/fesm2015/devextreme-angular-ui-' + component.wrapperName + '.js',
       output: {
         filename: component.name + '-renovated-wrapper.js',
       },

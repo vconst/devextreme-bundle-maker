@@ -22,7 +22,7 @@ module.exports = components.reduce((bundles, component) => {
   if(!component.private) {
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-wrapper',
-      entry: './devextreme-vue/npm/' + component.wrapperName + '.js',
+      entry: './devextreme-vue/packages/devextreme-vue/npm/' + component.wrapperName + '.js',
       output: {
         filename: component.name + '-wrapper.js',
       },
@@ -36,7 +36,7 @@ module.exports = components.reduce((bundles, component) => {
     }));
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-renovated',
-      entry: './devextreme-vue-renovated/npm/' + component.wrapperName + '.js',
+      entry: './devextreme-vue-renovated/packages/devextreme-vue/npm/' + component.wrapperName + '.js',
       output: {
         filename: component.name + '-renovated-wrapper.js',
       },
