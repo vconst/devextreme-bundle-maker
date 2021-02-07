@@ -78,9 +78,14 @@ export default class Tester {
             performance.mark("start");
             console.time(text);
             this.performanceTest(text, config);
-            console.timeEnd(text);
-            performance.mark("end")
-            performance.measure(text, 'start', 'end');
+            new Promise(() => {
+                window['requestIdleCallback'](() => {
+                    console.timeEnd(text);
+                    performance.mark("end")
+                    performance.measure(text, 'start', 'end');
+                })
+            });
+
         })
     }
 };
