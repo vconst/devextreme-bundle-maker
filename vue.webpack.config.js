@@ -50,6 +50,8 @@ module.exports = components.reduce((bundles, component) => {
     }));
   }
 
+  if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('vue') >= 0) return bundles;
+
   const nativePostfix = component.spike ? '' : '-native';
 
   bundles.push(_.merge({}, configTemplate,{

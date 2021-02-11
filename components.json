@@ -5,6 +5,6 @@
         { "name": "pager", "wrapperName": "pager", "path": "ui/pager/pager", "private": true },
         { "name": "data_grid_light_page", "wrapperName": "data_grid_light_page",  "path": "spike/data_grid_light_page", "private": true, "spike": true },
         { "name": "component_nesting_page", "wrapperName": "component_nesting_page",  "path": "spike/component_nesting_page", "private": true, "spike": true },
-        { "name": "bullet", "wrapperName": "bullet",  "path": "viz/bullet", "private": true }
+        { "name": "bullet", "wrapperName": "bullet",  "path": "viz/sparklines/bullet", "private": true, "ignoreFrameworks": ["angular"] }
     ]
 }
