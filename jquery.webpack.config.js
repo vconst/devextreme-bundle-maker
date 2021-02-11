@@ -52,7 +52,7 @@ module.exports = components.reduce((bundles, component) => {
   if(!component.spike) {
     bundles.push(_.merge({}, configTemplate,{
         name: component.name + '-basic',
-        entry: './devextreme/artifacts/transpiled/ui/' + component.name + '.js',
+        entry: './devextreme/artifacts/transpiled/' + (component.path?.indexOf('viz') === 0 ? 'viz/' : 'ui/') + component.name + '.js',
         output: {
           filename: component.name + '-basic.js',
         },
