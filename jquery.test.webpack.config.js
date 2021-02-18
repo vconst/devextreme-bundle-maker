@@ -40,12 +40,11 @@ module.exports = components.reduce((files, component) => {
         new HtmlWebpackPlugin({
             filename: component.name + '-basic.html',
             template: pathToComponent + '-basic.html'
-        }),
-        new HtmlWebpackPlugin({
+        })].concat(component.renovated !== false ? [
+            new HtmlWebpackPlugin({
             filename: component.name + '-renovated.html',
             template: pathToComponent + '-renovated.html'
-        }),
-   ]
+        })] : [])
   }));
 
   return files;

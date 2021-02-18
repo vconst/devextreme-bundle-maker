@@ -6,6 +6,7 @@ import {
   Event,
   Effect,
   Ref,
+  RefObject
 } from 'devextreme-generator/component_declaration/common';
 
 function viewFunction({
@@ -17,7 +18,7 @@ function viewFunction({
 }
 
 @ComponentBindings()
-class ToolbarOtemProps {
+class ToolbarItemProps {
   @OneWay()
   text: string = '';
   @Event()
@@ -27,17 +28,20 @@ class ToolbarOtemProps {
 @Component({
   view: viewFunction,
 })
-export class ToolbarItem extends JSXComponent(ToolbarOtemProps) {
+export class ToolbarItem extends JSXComponent(ToolbarItemProps) {
   @Ref()
-  inputRef!: HTMLDivElement;
+  inputRef!: RefObject<HTMLDivElement>;
   
   click(e: any): void {
     this.props.onClick?.(e.target.value);
   }
 
   @Effect()
+  emptyEffect() {}
+
+  @Effect()
   clickEffect(): () => void {
-    this.inputRef.addEventListener('click', this.click);
-    return (): void => this.inputRef.removeEventListener('click', this.click);
+    this.inputRef.current.addEventListener('click', this.click);
+    return (): void => this.inputRef.current.removeEventListener('click', this.click);
   }
 }

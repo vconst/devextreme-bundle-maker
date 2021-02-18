@@ -10,7 +10,7 @@ const configTemplate = {
     libraryTarget: 'commonjs2'
   },
   optimization: {
-    // minimize: false
+    minimize: false
   },
   externals: {
     'angular': 'window.angular',
