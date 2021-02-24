@@ -6,6 +6,7 @@ import {
   JSXComponent,
   OneWay,
   InternalState,
+  RefObject
 } from 'devextreme-generator/component_declaration/common';
 import eventsEngine from '../../../events/core/events_engine';
 
@@ -70,7 +71,7 @@ class DataGridLightProps {
   view: viewFunction,
 })
 export class DataGridLight extends JSXComponent(DataGridLightProps) {
-  @Ref() widgetRef!: HTMLDivElement;
+  @Ref() widgetRef!: RefObject<HTMLDivElement>;
 
   @InternalState() topRowIndex = 0;
 
@@ -100,7 +101,7 @@ export class DataGridLight extends JSXComponent(DataGridLightProps) {
       this.topRowIndex = Math.floor((e.target.scrollTop + this.rowHeight - 1) / this.rowHeight);
     };
 
-    eventsEngine.on(this.widgetRef, 'scroll', handleScroll);
+    eventsEngine.on(this.widgetRef.current, 'scroll', handleScroll);
     return (): void => eventsEngine.off(this.widgetRef, 'scroll', handleScroll);
   }
 
