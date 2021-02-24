@@ -21,7 +21,7 @@ function viewFunction({
     <div
       {...restAttributes} // eslint-disable-line react/jsx-props-no-spreading
       className="my-grid"
-      ref={widgetRef as any}
+      ref={widgetRef}
       style={styles}
     >
       <table>
@@ -102,7 +102,7 @@ export class DataGridLight extends JSXComponent(DataGridLightProps) {
     };
 
     eventsEngine.on(this.widgetRef.current, 'scroll', handleScroll);
-    return (): void => eventsEngine.off(this.widgetRef, 'scroll', handleScroll);
+    return (): void => eventsEngine.off(this.widgetRef.current, 'scroll', handleScroll);
   }
 
   handleScroll(e): void {
