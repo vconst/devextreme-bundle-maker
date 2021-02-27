@@ -52,11 +52,12 @@ module.exports = components.reduce((bundles, component) => {
   }
 
   if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('react') >= 0) return bundles;
+  if(component.renovated === false) return bundles;
 
   const nativePostfix = component.spike ? '' : '-native';
   bundles.push(_.merge({}, configTemplate,{
     name: component.name + '-native',
-    entry: './devextreme-renovated/artifacts/react/renovation/' + component.path + '.tsx',
+    entry: './devextreme-renovated/artifacts/react/renovation/' + component.path + '.js',
     output: {
       filename: component.name + nativePostfix + '.js',
     },
@@ -79,6 +80,13 @@ module.exports = components.reduce((bundles, component) => {
             }
           }],
         },
+        {
+          test: /\.js?$/,
+          loader: 'babel-loader',
+          options: {
+            plugins: ["@babel/plugin-proposal-nullish-coalescing-operator", "@babel/plugin-proposal-optional-chaining"]
+          }
+        }
       ],
     },
     resolve: {

@@ -93,6 +93,7 @@ module.exports = components.reduce((bundles, component) => {
   }
 
   if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('angular') >= 0) return bundles;
+  if(component.renovated === false) return bundles;
 
   const nativePostfix = component.spike ? '' : '-native';
   bundles.push(_.merge({}, configTemplate,{

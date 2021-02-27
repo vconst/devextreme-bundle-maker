@@ -28,8 +28,8 @@
         "./devextreme-renovated/artifacts/react/renovation/**/*.tsx"
     ],
     "exclude": [
-        "./devextreme-renovated/artifacts/react/renovation/preact_wrapper/**/*.ts",
-        "./devextreme-renovated/artifacts/react/renovation/preact_wrapper/**/*.tsx",
+        "./devextreme-renovated/artifacts/react/renovation/component_wrapper/**/*.ts",
+        "./devextreme-renovated/artifacts/react/renovation/component_wrapper/**/*.tsx",
         "devextreme-react",
         "devextreme-react-renovated"
     ]

@@ -30,7 +30,7 @@
     "./devextreme/artifacts/angular/renovation/**/*.ts"
   ],
   "exclude": [
-    "./devextreme/artifacts/angular/renovation/preact_wrapper/**/*.ts",
+    "./devextreme/artifacts/angular/renovation/component_wrapper/**/*.ts",
     "devextreme-angular",
     "devextreme-angular-renovated"
   ]
