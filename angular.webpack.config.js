@@ -10,7 +10,7 @@ const configTemplate = {
     libraryTarget: 'commonjs2'
   },
   optimization: {
-    // minimize: false
+    minimize: false
   },
   externals: {
     'angular': 'window.angular',
@@ -91,6 +91,9 @@ module.exports = components.reduce((bundles, component) => {
       },
     }));
   }
+
+  if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('angular') >= 0) return bundles;
+
   const nativePostfix = component.spike ? '' : '-native';
   bundles.push(_.merge({}, configTemplate,{
     name: component.name + '-native',

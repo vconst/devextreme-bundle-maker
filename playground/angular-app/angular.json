@@ -24,8 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "../../devextreme/artifacts/npm/devextreme/dist/css/dx.common.css",
-              "../../devextreme/artifacts/npm/devextreme/dist/css/dx.light.css",
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
               "src/styles.css"
             ],
             "scripts": []

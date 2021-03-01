@@ -3,7 +3,9 @@
         { "name": "button", "wrapperName": "button", "path": "ui/button" },
         { "name": "check_box", "wrapperName": "check-box", "path": "ui/check_box" },
         { "name": "pager", "wrapperName": "pager", "path": "ui/pager/pager", "private": true },
+        { "name": "scheduler", "wrapperName": "scheduler", "path": "ui/scheduler", "private": true, "renovated": false },
         { "name": "data_grid_light_page", "wrapperName": "data_grid_light_page",  "path": "spike/data_grid_light_page", "private": true, "spike": true },
-        { "name": "component_nesting_page", "wrapperName": "component_nesting_page",  "path": "spike/component_nesting_page", "private": true, "spike": true }
+        { "name": "component_nesting_page", "wrapperName": "component_nesting_page",  "path": "spike/component_nesting_page", "private": true, "spike": true },
+        { "name": "bullet", "wrapperName": "bullet",  "path": "viz/sparklines/bullet", "ignoreFrameworks": ["angular"] }
     ]
 }

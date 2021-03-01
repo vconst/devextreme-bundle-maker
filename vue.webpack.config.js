@@ -11,7 +11,7 @@ const configTemplate = {
     libraryTarget: 'commonjs2'
   },
   optimization: {
-    // minimize: false 
+    minimize: false 
   },
   externals: {
     'vue': 'vue',
@@ -49,6 +49,8 @@ module.exports = components.reduce((bundles, component) => {
       ],
     }));
   }
+
+  if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('vue') >= 0) return bundles;
 
   const nativePostfix = component.spike ? '' : '-native';
 
