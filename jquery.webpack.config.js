@@ -17,7 +17,7 @@ const configTemplate = {
   },
   externals: [
     function(context, request, callback) {
-      if (/renderer$/.test(request)){
+      if (/renderer$/.test(request) && !/renderers/.test(request)){
         return callback(null, 'window.jQuery');
       }
 
