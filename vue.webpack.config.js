@@ -19,6 +19,8 @@ const configTemplate = {
 };
 
 module.exports = components.reduce((bundles, component) => {
+  if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('vue') >= 0) return bundles;
+
   if(!component.private) {
     bundles.push(_.merge({}, configTemplate, {
       name: component.name + '-wrapper',
@@ -50,7 +52,6 @@ module.exports = components.reduce((bundles, component) => {
     }));
   }
 
-  if(component.ignoreFrameworks && component.ignoreFrameworks.indexOf('vue') >= 0) return bundles;
   if(component.renovated === false) return bundles;
 
   const nativePostfix = component.spike ? '' : '-native';
