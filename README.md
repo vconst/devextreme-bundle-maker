@@ -48,3 +48,4 @@ Just check out the sizes of files in the `bundles` directory.
 Go to the `performance` tab in dev tools. Set `memory` checkbox to true and start recording. After it refresh the page, wait a second, stop recording and check used memory heap size in right top corner.
 
 To check if there is memory leak remove and add widgets to the page several times and check memory graphic.
+
