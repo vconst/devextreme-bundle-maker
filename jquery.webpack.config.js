@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const components = require('./components.json').components;
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -38,16 +39,21 @@ module.exports = components.reduce((bundles, component) => {
         filename: component.name + renovatedPostFix + '.js',
       },  
       plugins: [
-          new HtmlWebpackPlugin({
-              minify: false,
-              filename: pathToComponent + renovatedPostFix + '.html',
-              template: PATH_TO_TEMPLATE
-          }),
-          new BundleAnalyzerPlugin({
-            analyzerMode: "static",
-            openAnalyzer: false,
-            reportFilename: component.name + renovatedPostFix + ".html"
-          })
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new HtmlWebpackPlugin({
+            minify: false,
+            filename: pathToComponent + renovatedPostFix + '.html',
+            template: PATH_TO_TEMPLATE
+        }),
+        new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+          openAnalyzer: false,
+          reportFilename: component.name + renovatedPostFix + ".html"
+        })
     ]
     }));
   }
