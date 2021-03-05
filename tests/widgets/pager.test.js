@@ -3,7 +3,8 @@ const { testPerformance, logResults } = require('../helpers/performance');
 describe('Pager', () => {
   afterAll(logResults);
   [
-    'Minimum options', 
+    'Minimum options',
+    'Cold Minimum options',
   ].forEach((name) => {
     ['jquery'].forEach((framework) => {
       it(`${name} ${framework}`, async () => {

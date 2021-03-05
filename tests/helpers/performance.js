@@ -42,16 +42,28 @@ const meeasureMemory = async (name) => {
   return max ? diff / (max - start) : diff;
 }
 
-const measureAction = async (name) => {
+const measureAction = async (name, url) => {
+
   let times = [];
   const isMemoryTest = name.indexOf('Memory ') === 0;
+  const isCold = name.indexOf('Cold ') === 0;
+
+  if(isCold) {
+    name = name.slice(5);
+  } else {
+    await page.goto(url);
+  }
 
   if(isMemoryTest) {
     await page._client.send('HeapProfiler.enable');
   }
 
   for(var i = 0; i < (isMemoryTest ? 5 : 20); i++) {
-    await page.evaluate(executeAction, 'clear');
+    if(isCold) {
+        await page.goto(url);
+    } else {
+      await page.evaluate(executeAction, 'clear');
+    }
     if(name.indexOf('Option') === 0 || name.indexOf('Method') === 0) {
       await page.evaluate(executeAction, 'create');
     }
@@ -91,8 +103,7 @@ exports.testPerformance = async (name, framework, demoNames) => {
       url = `http://127.0.0.1:${port}/#/${demoNames[i].replace('-', '/')}`;
     }
     console.log(name, url);
-    await page.goto(url);
-    const time = await measureAction(name);
+    const time = await measureAction(name, url);
     times.push(+time.toFixed(3));
   }
 

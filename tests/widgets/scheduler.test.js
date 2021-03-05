@@ -5,6 +5,8 @@ describe('Scheduler', () => {
   [
     '10 resources without renovatedRender',
     '10 resources with renovatedRender',
+    'Cold 10 resources without renovatedRender',
+    'Cold 10 resources with renovatedRender',
     'Memory create',
     'Memory leaks',
   ].forEach((name) => {
