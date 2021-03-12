@@ -30,37 +30,37 @@ const configTemplate = {
 module.exports = components.reduce((bundles, component) => {
   const pathToComponent =  PATH_TO_HTML + component.name;
   const renovatedPostFix = component.spike ? '' : '-renovated';
+  const transpiledComponentPath = (component.path?.indexOf('viz') === 0 ? 'viz/' : 'ui/') + component.name;
+  const transpiledRenovatedComponentPath = component.spike ? 'renovation/' + component.path + '.j' : transpiledComponentPath;
 
-  if(component.renovated !== false) {
-    bundles.push(_.merge({}, configTemplate, {
-      name: component.name + '-renovated',
-      entry: './devextreme-renovated/artifacts/transpiled-renovation-npm/renovation/' + component.path + '.j.js',
-      output: {
-        filename: component.name + renovatedPostFix + '.js',
-      },  
-      plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new HtmlWebpackPlugin({
-            minify: false,
-            filename: pathToComponent + renovatedPostFix + '.html',
-            template: PATH_TO_TEMPLATE
-        }),
-        new BundleAnalyzerPlugin({
-          analyzerMode: "static",
-          openAnalyzer: false,
-          reportFilename: component.name + renovatedPostFix + ".html"
-        })
-    ]
-    }));
-  }
+  bundles.push(_.merge({}, configTemplate, {
+    name: component.name + '-renovated',
+    entry: './devextreme-renovated/artifacts/transpiled-renovation-npm/' + transpiledRenovatedComponentPath + '.js',
+    output: {
+      filename: component.name + renovatedPostFix + '.js',
+    },  
+    plugins: [
+      new webpack.DefinePlugin({
+          'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+          }
+      }),
+      new HtmlWebpackPlugin({
+          minify: false,
+          filename: pathToComponent + renovatedPostFix + '.html',
+          template: PATH_TO_TEMPLATE
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        openAnalyzer: false,
+        reportFilename: component.name + renovatedPostFix + ".html"
+      })
+  ]
+  }));
   if(!component.spike) {
     bundles.push(_.merge({}, configTemplate,{
         name: component.name + '-basic',
-        entry: './devextreme/artifacts/transpiled/' + (component.path?.indexOf('viz') === 0 ? 'viz/' : 'ui/') + component.name + '.js',
+        entry: './devextreme/artifacts/transpiled/' + transpiledComponentPath + '.js',
         output: {
           filename: component.name + '-basic.js',
         },
