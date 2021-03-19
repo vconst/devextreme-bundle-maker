@@ -31,7 +31,7 @@ module.exports = components.reduce((bundles, component) => {
   const pathToComponent =  PATH_TO_HTML + component.name;
   const renovatedPostFix = component.spike ? '' : '-renovated';
   const transpiledComponentPath = (component.path?.indexOf('viz') === 0 ? 'viz/' : 'ui/') + component.name;
-  const transpiledRenovatedComponentPath = component.spike ? 'renovation/' + component.path + '.j' : transpiledComponentPath;
+  const transpiledRenovatedComponentPath = component.spike || component.renovated !== false ? 'renovation/' + component.path + '.j' : transpiledComponentPath;
 
   bundles.push(_.merge({}, configTemplate, {
     name: component.name + '-renovated',

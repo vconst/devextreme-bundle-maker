@@ -24,9 +24,9 @@ clone_and_build_repo()
 
     cd ../.. && log 3 SUCCESS 'go to '$REPO || log 3 ERROR 'go to '$REPO
 
-    $SUDO npm i devextreme-internal-tools@latest &&
-        log 3 SUCCESS 'update internal tools in '$REPO ||
-        log 3 ERROR 'update internal tools in '$REPO
+    # $SUDO npm i devextreme-internal-tools@latest &&
+    #     log 3 SUCCESS 'update internal tools in '$REPO ||
+    #     log 3 ERROR 'update internal tools in '$REPO
 
     $SUDO npm i && log 3 SUCCESS 'install packages' || log 3 ERROR 'install packages'
 
