@@ -18,7 +18,7 @@ clone_and_build_repo()
 
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
 
-    $SUDO npm i ../../../devextreme$2/artifacts/npm/devextreme$3 &&
+    $SUDO npm i ../../../devextreme$2/artifacts/npm/devextreme &&
         log 3 SUCCESS 'update path to devextreme in '$REPO ||
         log 3 ERROR 'update path to devextreme in '$REPO
 
@@ -53,7 +53,7 @@ process_repo()
     log 2 END 'clone and build '$REPO_NAME
 
     log 2 START 'clone and build '$REPO_NAME-renovated
-    clone_and_build_repo $REPO_NAME -renovated -renovation
+    clone_and_build_repo $REPO_NAME -renovated
     log 2 END 'clone and build '$REPO_NAME-renovated
 }
 
