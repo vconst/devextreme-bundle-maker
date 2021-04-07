@@ -4,7 +4,7 @@ import {
   JSXComponent,
   OneWay,
   Event
-} from 'devextreme-generator/component_declaration/common';
+} from '@devextreme-generator/declarations';
 import { ToolbarItem } from './toolbar_item';
 
 function viewFunction({

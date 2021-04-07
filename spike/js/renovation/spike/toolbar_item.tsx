@@ -7,7 +7,7 @@ import {
   Effect,
   Ref,
   RefObject
-} from 'devextreme-generator/component_declaration/common';
+} from '@devextreme-generator/declarations';
 
 function viewFunction({
   inputRef, props: { text }

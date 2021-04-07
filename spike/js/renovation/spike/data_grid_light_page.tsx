@@ -3,7 +3,7 @@ import {
   ComponentBindings,
   JSXComponent,
   Effect,
-} from 'devextreme-generator/component_declaration/common';
+} from '@devextreme-generator/declarations';
 
 import { DataGridLight } from './data_grid_light/data_grid_light';
 

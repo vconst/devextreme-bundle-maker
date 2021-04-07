@@ -2,7 +2,7 @@ import {
   Component,
   ComponentBindings,
   JSXComponent
-} from 'devextreme-generator/component_declaration/common';
+} from '@devextreme-generator/declarations';
 
 import { OneLevel } from './component_nesting/one_level';
 import { TwoLevel } from './component_nesting/two_level';

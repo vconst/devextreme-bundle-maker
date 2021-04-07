@@ -7,7 +7,7 @@ import {
   OneWay,
   InternalState,
   RefObject
-} from 'devextreme-generator/component_declaration/common';
+} from '@devextreme-generator/declarations';
 import eventsEngine from '../../../events/core/events_engine';
 
 const getVirtualRowStyles = (item: any): { [key: string]: string | number } => ({
