@@ -64,7 +64,7 @@ build_devextreme()
     $SUDO echo 'module.exports = [];' > './js/bundles/modules/parts/renovation.js'
 
     $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
-    $SUDO npm run build:dev && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery'
+    $SUDO npm run build && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery'
 
     cd ../devextreme-renovated && log 2 SUCCESS 'go to ./devextreme-renovated'
     git pull && log 2 SUCCESS 'git pull' || log 2 ERROR 'git pull'
@@ -74,7 +74,7 @@ build_devextreme()
         log 1 ERROR 'spike copied to devextreme-renovated'
 
     $SUDO npm i && log 2 SUCCESS 'install packages' || log 2 ERROR 'install packages'
-    $SUDO npm run build:dev && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery renovation'
+    $SUDO npm run build && log 2 SUCCESS 'build jquery' || log 2 ERROR 'build jquery renovation'
     $SUDO npm run build:react && log 2 SUCCESS 'build react' || log 2 ERROR 'build react'
     $SUDO npm run build:vue && log 2 SUCCESS 'build vue' || log 2 ERROR 'build vue'
     $SUDO npm run build:angular && log 2 SUCCESS 'build angular' || log 2 ERROR 'build angular'
