@@ -26,7 +26,7 @@
     "strictInjectionParameters": true
   },
   "include": [
-    "./devextreme-angular/dist/ui/**/*.ts",
+    "./devextreme-angular/packages/devextreme-angular/dist/ui/**/*.ts",
     "./devextreme/artifacts/angular/renovation/**/*.ts"
   ],
   "exclude": [

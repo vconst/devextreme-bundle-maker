@@ -18,7 +18,8 @@ const configTemplate = {
     '@angular/common': '@angular/common',
     '@angular/forms': '@angular/forms',
     '@angular/platform-browser': '@angular/platform-browser',
-    'devextreme-angular/core': './devextreme-angular-core.js'
+    'devextreme-angular/core': './devextreme-angular-core.js',
+    'devextreme-angular/ui/nested': './devextreme-angular-ui-nested.js',
   }
 };
 
