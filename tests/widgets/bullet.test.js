@@ -1,6 +1,6 @@
 const { testPerformance, logResults } = require('../helpers/performance');
 
-describe('Bullet', () => {
+describe.skip('Bullet', () => {
   afterAll(logResults);
   [
     'Minimum options',
