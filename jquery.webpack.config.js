@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const path = require('path');
 const components = require('./components.json').components;
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -25,6 +26,11 @@ const configTemplate = {
       callback();
     }
   ],
+  resolve: {
+    alias: {
+      '@devextreme/vdom': path.resolve('./devextreme-renovated/node_modules/@devextreme/vdom/dist/cjs/index.js'),
+    }
+  },
 };
 
 module.exports = components.reduce((bundles, component) => {
